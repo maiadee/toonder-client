@@ -75,31 +75,42 @@ export const profileIndex = async () => {
 
   export const profileLike = async (profileId) => {
     try {
-      const res = await axios.put(BASE_URL + `/${profileId}/likes`, {
-        headers: {
-          Authorization: `Bearer ${getToken()}`
+      const res = await axios.put(
+        `${BASE_URL}/${profileId}/likes`, 
+        {},  
+        {
+          headers: {
+            Authorization: `Bearer ${getToken()}`
+          }
         }
-      })
-      console.log(res)
+      );
+      console.log(res);
+      return res.data;
     } catch (error) {
-      console.log(error)
-      throw error
+      console.error("Error liking profile:", error);
+      throw error;
     }
-  }
-
+  };
+  
   export const profileDislike = async (profileId) => {
     try {
-      const res = await axios.put(BASE_URL + `/${profileId}/dislikes`, {
-        headers: {
-          Authorization: `Bearer ${getToken()}`
+      const res = await axios.put(
+        `${BASE_URL}/${profileId}/dislikes`, 
+        {}, 
+        {
+          headers: {
+            Authorization: `Bearer ${getToken()}`
+          }
         }
-      })
-      console.log(res)
+      );
+      console.log(res);
+      return res.data;
     } catch (error) {
-      console.log(error)
-      throw error
+      console.error("Error disliking profile:", error);
+      throw error;
     }
-  }
+  };
+  
 
   export const matchesIndex = async (profileId) => {
     try {
