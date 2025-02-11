@@ -12,12 +12,12 @@ function App() {
     <>
       <main>
         <Routes>
-          <Route path="/" element={<IndexCard />} />
-          {/* <Route path="/posts/:postId" element={<FullProfileCard />} /> */}
-          <Route path="/posts/:postId/edit" element={<UpdateProfile />} />
-          <Route path="/posts/new" element={<CreateProfile />} />
+          <Route path="/profiles" element={<IndexCard />} />
+          {/* <Route path="/profiles/:id" element={<FullProfileCard />} /> */}
+          <Route path="/profiles/:id/" element={<UpdateProfile />} />
+          <Route path="/profiles" element={<CreateProfile />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="signin" element={<Login />} />
+          <Route path="login" element={<Login />} />
         </Routes>
       </main>
     </>

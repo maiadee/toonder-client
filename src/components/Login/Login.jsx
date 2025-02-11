@@ -1,12 +1,11 @@
 import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router' 
-import { signin } from '../../services/userService'
 import { setToken } from '../../utils/auth'
 import { getUserFromToken } from '../../utils/auth'
 import { UserContext } from '../../contexts/UserContext'
 import { login } from '../../services/userService'; 
 
-export default function Signin() {
+export default function Login() {
 
     const { setUser } = useContext(UserContext)
 
@@ -22,12 +21,12 @@ export default function Signin() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const data = await signin(formData)
+            const data = await login(formData)
             setToken(data.token)
 
             setUser(getUserFromToken())
 
-            navigate('/index')
+            navigate('/profileIndex')
         } catch (error) {
             console.log(error)
             setError(error.response.data.message)

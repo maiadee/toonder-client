@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
 
-import { profileIndex, profileLike, profileDislike } from "./services/profileService"
+import { profileIndex, profileLike, profileDislike } from "../../services/profileService"
 
 import Spinner from '../Spinner/Spinner'
 
@@ -82,5 +82,3 @@ export default function IndexCard({ profile }) {
     </>
   );
 }
-
-export default IndexCard;

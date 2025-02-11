@@ -30,10 +30,9 @@ export default function CreateProfile() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const createdProfile = await profileCreate(formData);
-            navigate(`/profiles/${createdProfile._id}`);
+            navigate('/profiles');
         } catch (error) {
-            setErrors(error.response?.data?.errors || { general: "Failed to create profile." });
+            setErrors(error.response.data.errors || { general: "Failed to create profile." });
         }
     };
 
