@@ -89,18 +89,18 @@ export default function UpdateProfile() {
                 <div>
                     <label htmlFor="gender">Gender</label>
                     <select name="gender" id="gender" value={formData.gender} onChange={handleChange} required>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Other">Other</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
                     </select>
                 </div>
 
                 <div>
                     <label htmlFor="lookingFor">Looking For</label>
                     <select name="lookingFor" id="lookingFor" value={formData.lookingFor} onChange={handleChange} required>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="No Preference">No Preference</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="no preference">No Preference</option>
                     </select>
                 </div>
 

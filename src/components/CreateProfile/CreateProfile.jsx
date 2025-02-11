@@ -62,17 +62,17 @@ export default function CreateProfile() {
                 <label>Gender:</label>
                 <select name="gender" value={formData.gender} onChange={handleChange} required>
                     <option value="" disabled>Select Gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
                 </select>
 
                 <label>Looking For:</label>
                 <select name="lookingFor" value={formData.lookingFor} onChange={handleChange} required>
                     <option value="" disabled>Select Preference</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="No Preference">No Preference</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="no preference">No Preference</option>
                 </select>
 
                 <label>Image 2:</label>
