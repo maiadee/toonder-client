@@ -30,7 +30,7 @@ const [errors, setErrors] = useState({})
    
       setUser(getUserFromToken())
      
-      navigate('/createprofile')
+      navigate('/profiles')
     } catch (error) {
       setErrors(error.response.data.errors)
     }
@@ -98,7 +98,9 @@ const [errors, setErrors] = useState({})
           {(formData.password.length > 0 && formData.confirmPassword > 0 || formData.password !== formData.confirmPassword) &&
             <p className='error-message'>Passwords do not match</p>
           }
+          
         </div>
+        <button disabled={formData.password === '' || formData.password !== formData.confirmPassword} type="submit">Submit</button>
 
     </form>
 </section>
