@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
+import { profileIndex, profileLike, profileDislike } from "./services/profileService"
 
 import Spinner from '../Spinner/Spinner'
 
@@ -19,15 +20,9 @@ export default function IndexCard({ profile }) {
     const fetchProfile = async () => {
       setIsLoading(true)
     try {
-      const response = await fetch("/profiles", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+        const data = await profileIndex();
 
-      const data = await response.json();
-
-      if (response.ok) {
+      if (data) {
         setCard(data); // Set next profile
       } else {
         setCard(null); // No more profiles available
@@ -47,14 +42,7 @@ export default function IndexCard({ profile }) {
       setIsLoading(true)
     try {
       // * Send a request to the backend
-      const response = await fetch(`/profiles/${profile._id}/likes`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`, //  sends users token for authentication
-        },
-      });
-
+      await profileLike(profile._id)
       fetchProfile();
     } catch (error) {
       console.error(error);
@@ -64,14 +52,7 @@ export default function IndexCard({ profile }) {
     const handleDislike = async () => {
      setIsLoading(true)
     try {
-      const response = await fetch(`/profiles/${profile._id}/dislikes`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`, //  sends users token for authentication
-        },
-      });
-
+      await profileDislike(profile._id)
       fetchProfile();
     } catch (error) {
       console.error(error);
