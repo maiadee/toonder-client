@@ -13,7 +13,7 @@ export default function CreateProfile() {
         location: "",
         bio: "",
         gender: "",
-        lookingFor: "",
+        preferences: "",
         image1: "",
         image2: "",
     });
@@ -30,7 +30,11 @@ export default function CreateProfile() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            navigate('/profiles');
+            formData.age = Number(formData.age)
+            console.log(formData)
+            await profileCreate(formData)
+            navigate('/profiles/index');
+        
         } catch (error) {
             setErrors(error.response.data.errors || { general: "Failed to create profile." });
         }
@@ -68,7 +72,7 @@ export default function CreateProfile() {
                 </select>
 
                 <label>Looking For:</label>
-                <select name="lookingFor" value={formData.lookingFor} onChange={handleChange} required>
+                <select name="preferences" value={formData.preferences} onChange={handleChange} required>
                     <option value="" disabled>Select Preference</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
