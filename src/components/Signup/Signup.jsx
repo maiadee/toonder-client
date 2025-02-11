@@ -30,7 +30,7 @@ const [errors, setErrors] = useState({})
    
       setUser(getUserFromToken())
      
-      navigate('/profiles')
+      navigate('/profiles/create')
     } catch (error) {
       setErrors(error.response.data.errors)
     }
