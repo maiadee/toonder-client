@@ -26,7 +26,7 @@ export default function Login() {
 
             setUser(getUserFromToken())
 
-            navigate('/profiles/create')
+            navigate('/profiles/index')
         } catch (error) {
             console.log(error)
             setError(error.response.data.message)

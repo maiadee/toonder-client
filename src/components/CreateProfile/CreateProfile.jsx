@@ -6,6 +6,7 @@ import { profileCreate } from '../../services/profileService';
 
 export default function CreateProfile() {
     const { user } = useContext(UserContext);
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         name: "",
@@ -19,7 +20,6 @@ export default function CreateProfile() {
     });
 
     const [errors, setErrors] = useState({});
-    const navigate = useNavigate();
 
     useEffect(() => {
         if (!user) {
