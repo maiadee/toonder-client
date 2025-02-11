@@ -5,8 +5,12 @@ const BASE_URL = import.meta.env.VITE_API_URL + '/profiles'
 
 export const profileIndex = async () => {
     try {
-      const res = await axios.get(BASE_URL)
-      return res.data
+      const res = await axios.get(BASE_URL, {
+        headers: {
+          Authorization: `Bearer ${getToken()}`
+        }
+      })
+      return res.data || []
     } catch (error) {
       console.log(error)
       throw error
@@ -15,7 +19,11 @@ export const profileIndex = async () => {
   
   export const profileShow = async (profileId) => {
     try {
-      const res = await axios.get(BASE_URL + `/${profileId}`)
+      const res = await axios.get(BASE_URL + `/${profileId}`, {
+        headers: {
+          Authorization: `Bearer ${getToken()}`
+        }
+      })
       return res.data
     } catch (error) {
       console.log(error)
@@ -100,7 +108,7 @@ export const profileIndex = async () => {
           Authorization: `Bearer ${getToken()}`
         }
       })
-      console.log(res)
+      return res.data
     } catch (error) {
       console.log(error)
       throw error

@@ -45,8 +45,7 @@ export default function UpdateProfile() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const updatedProfile = await profileUpdate(profileId, formData);
-            navigate(`/profile/${updatedProfile._id}`);
+            navigate('/profiles/index');
         } catch (error) {
             setErrors(error.response.data.errors);
         }

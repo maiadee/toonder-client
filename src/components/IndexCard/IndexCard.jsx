@@ -1,37 +1,36 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router";
-
-import { profileIndex, profileLike, profileDislike } from "./services/profileService"
-
+import { profileIndex, profileLike, profileDislike } from "../../services/profileService"
 import Spinner from '../Spinner/Spinner'
 
-export default function IndexCard({ profile }) {
+export default function IndexCard() {
   // state
 
-    const [card, setCard] = useState();
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState("");
-
-  // location variables
-
-  const navigate = useNavigate();
+  const [profile, setProfile] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   //  functions
 
-    const fetchProfile = async () => {
-      setIsLoading(true)
+  const fetchProfile = async () => {
+    setIsLoading(true)
+    setError("");
     try {
-        const data = await axios.get(profileIndex);
+
+      const data = await profileIndex();
+
 
       if (data) {
-        setCard(data); // Set next profile
+        setProfile(data); // Set next profile
       } else {
-        setCard(null); // No more profiles availablea
+
+        setProfile(null); // No more profiles available
+
       }
     } catch (error) {
       console.error(error);
+      setError("Failed to load profiles. Please try again.");
     } finally {
-        setIsLoading(false)
+      setIsLoading(false);
     }
   };
 
@@ -39,35 +38,45 @@ export default function IndexCard({ profile }) {
     fetchProfile(); // Fetch a profile when the component loads
   }, []);
 
-    const handleLike = async () => {
-      setIsLoading(true)
+  const handleLike = async () => {
+    setIsLoading(true)
     try {
       // * Send a request to the backend
       await axios.put(profileLike(profile._id))
       fetchProfile();
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-    const handleDislike = async () => {
-     setIsLoading(true)
+  const handleDislike = async () => {
+    setIsLoading(true)
     try {
       await axios.put(profileDislike(profile._id))
       fetchProfile();
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  // Render loading state
+  if (isLoading) return <Spinner />;
+
+  // Render error state
+  if (error) return <p className="error-message">{error}</p>;
+
+  // Render if no profiles are available
+  if (!profile) return <p>No profiles available at the moment.</p>;
 
   return (
     <>
       <div className="index-card">
         <div className="profile-image">
-          {/* <img
-            src={profile.profileImage}
-            alt={`Profile image for ${profile.name}`}
-          /> */}
+
         </div>
         <div className="profile-index-info">
           <p>{profile.name}</p>
@@ -75,8 +84,8 @@ export default function IndexCard({ profile }) {
           <p>{profile.location}</p>
         </div>
         <div className="profile-buttons">
-          <button onClick={handleDislike}>👎</button>
-          <button onClick={handleLike}>👍</button>
+          <button onClick={handleDislike} disabled={isLoading}>👎</button>
+          <button onClick={handleLike} disabled={isLoading}>👍</button>
         </div>
       </div>
     </>
