@@ -15,12 +15,16 @@ export default function IndexCard() {
     setIsLoading(true)
     setError("");
     try {
+
       const data = await profileIndex();
+
 
       if (data) {
         setProfile(data); // Set next profile
       } else {
+
         setProfile(null); // No more profiles available
+
       }
     } catch (error) {
       console.error(error);
@@ -38,7 +42,7 @@ export default function IndexCard() {
     setIsLoading(true)
     try {
       // * Send a request to the backend
-      await profileLike(profile._id)
+      await axios.put(profileLike(profile._id))
       fetchProfile();
     } catch (error) {
       console.error(error);
@@ -50,7 +54,7 @@ export default function IndexCard() {
   const handleDislike = async () => {
     setIsLoading(true)
     try {
-      await profileDislike(profile._id)
+      await axios.put(profileDislike(profile._id))
       fetchProfile();
     } catch (error) {
       console.error(error);
@@ -72,10 +76,7 @@ export default function IndexCard() {
     <>
       <div className="index-card">
         <div className="profile-image">
-          <img
-          // src={profile.profileImage}
-          // alt={`Profile image for ${profile.name}`}
-          />
+
         </div>
         <div className="profile-index-info">
           <p>{profile.name}</p>
@@ -90,3 +91,4 @@ export default function IndexCard() {
     </>
   );
 }
+
