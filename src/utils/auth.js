@@ -1,3 +1,4 @@
+
 const tokenName = 'gsky_token'
 
 export const setToken = (token) => {

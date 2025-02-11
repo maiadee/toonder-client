@@ -1,7 +1,7 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
-import { profileUpdate, profileShow } from '../../services/postService';
+import { profileUpdate, profileShow } from '../../services/profileService';
 
 export default function UpdateProfile() {
     const { user } = useContext(UserContext);

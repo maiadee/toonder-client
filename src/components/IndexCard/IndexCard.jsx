@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
+
 import { profileIndex, profileLike, profileDislike } from "./services/profileService"
 
 import Spinner from '../Spinner/Spinner'
