@@ -28,7 +28,7 @@ const [errors, setErrors] = useState({})
    
       setUser(getUserFromToken())
      
-      navigate('/login')
+      navigate('/createprofile')
     } catch (error) {
       setErrors(error.response.data.errors)
     }
