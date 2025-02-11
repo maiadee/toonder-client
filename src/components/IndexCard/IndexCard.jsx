@@ -21,12 +21,12 @@ export default function IndexCard({ profile }) {
     const fetchProfile = async () => {
       setIsLoading(true)
     try {
-        const data = await profileIndex();
+        const data = await axios.get(profileIndex);
 
       if (data) {
         setCard(data); // Set next profile
       } else {
-        setCard(null); // No more profiles available
+        setCard(null); // No more profiles availablea
       }
     } catch (error) {
       console.error(error);
@@ -43,7 +43,7 @@ export default function IndexCard({ profile }) {
       setIsLoading(true)
     try {
       // * Send a request to the backend
-      await profileLike(profile._id)
+      await axios.put(profileLike(profile._id))
       fetchProfile();
     } catch (error) {
       console.error(error);
@@ -53,7 +53,7 @@ export default function IndexCard({ profile }) {
     const handleDislike = async () => {
      setIsLoading(true)
     try {
-      await profileDislike(profile._id)
+      await axios.put(profileDislike(profile._id))
       fetchProfile();
     } catch (error) {
       console.error(error);
@@ -64,10 +64,10 @@ export default function IndexCard({ profile }) {
     <>
       <div className="index-card">
         <div className="profile-image">
-          <img
+          {/* <img
             src={profile.profileImage}
             alt={`Profile image for ${profile.name}`}
-          />
+          /> */}
         </div>
         <div className="profile-index-info">
           <p>{profile.name}</p>
@@ -83,4 +83,3 @@ export default function IndexCard({ profile }) {
   );
 }
 
-export default IndexCard;
