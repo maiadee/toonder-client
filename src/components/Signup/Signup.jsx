@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router'
 import { setToken } from '../../utils/auth'
 import { getUserFromToken } from '../../utils/auth'
 import { UserContext } from '../../contexts/UserContext'
+import { signup } from '../../services/userService'; 
+
 
 export default function Signup(){
 

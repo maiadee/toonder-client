@@ -1,7 +1,8 @@
 import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
-import { profileCreate } from '../../services/postService'; 
+import { profileCreate } from '../../services/profileService'; 
+ 
 
 export default function CreateProfile() {
     const { user } = useContext(UserContext);
