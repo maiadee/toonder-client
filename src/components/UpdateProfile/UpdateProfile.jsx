@@ -29,7 +29,8 @@ export default function UpdateProfile() {
 
         profileShow(id)
             .then((data) => {
-                if (!data || data.id !== user.profile) {
+                console.log(data)
+                if (!data || data._id !== user.profile) {
                     setErrors({ message: "You don't have permission to edit this profile." });
                     return;
                 }
