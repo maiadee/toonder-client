@@ -8,35 +8,37 @@ import Spinner from "../Spinner/Spinner";
 
 export default function IndexCard() {
   // State
-  const [profiles, setProfiles] = useState([]); // Now handles an array of profiles
+  const [currentProfile, setCurrentProfile] = useState(null); // single profile
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
   // Fetch profiles
-  const fetchProfiles = async () => {
+  const fetchProfile = async () => {
     setIsLoading(true);
     setError("");
     try {
       const data = await profileIndex();
-      setProfiles(data || []); // Set profiles or an empty array
+      console.log(data);
+      setCurrentProfile(data);
     } catch (error) {
       console.error(error);
-      setError("Failed to load profiles. Please try again.");
+      setError("Failed to load profile. Please try again.");
     } finally {
       setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchProfiles(); // Fetch profiles when the component loads
+    fetchProfile(); // Fetch a profile when the component loads
   }, []);
 
   // Handle Like
-  const handleLike = async (profileId) => {
+  const handleLike = async () => {
+    if (!currentProfile) return; // No profile to like
     setIsLoading(true);
     try {
-      await profileLike(profileId); // Backend call to like a profile
-      setProfiles(profiles.filter((profile) => profile._id !== profileId)); // Remove liked profile from UI
+      await profileLike(currentProfile._id); // Like the current profile
+      fetchProfile(); // Fetch the next profile
     } catch (error) {
       console.error(error);
     } finally {
@@ -45,11 +47,12 @@ export default function IndexCard() {
   };
 
   // Handle Dislike
-  const handleDislike = async (profileId) => {
+  const handleDislike = async () => {
+    if (!currentProfile) return; // No profile to dislike
     setIsLoading(true);
     try {
-      await profileDislike(profileId); // Backend call to dislike a profile
-      setProfiles(profiles.filter((profile) => profile._id !== profileId)); // Remove disliked profile from UI
+      await profileDislike(currentProfile._id); // Dislike the current profile
+      fetchProfile(); // Fetch the next profile
     } catch (error) {
       console.error(error);
     } finally {
@@ -64,39 +67,30 @@ export default function IndexCard() {
   if (error) return <p className="error-message">{error}</p>;
 
   // Render if no profiles are available
-  if (!profiles.length) return <p>No profiles available at the moment.</p>;
+  if (!currentProfile) return <p>No profiles available at the moment.</p>;
 
   // Render profiles
   return (
-    <>
-      <h2>Browse Profiles</h2>
-      <div className="profiles-grid">
-        {profiles.map((profile) => (
-          <div key={profile._id} className="profile-card">
-            <div className="profile-image">
-              {profile.profileImage ? (
-                <img
-                  src={profile.profileImage}
-                  alt={`Profile of ${profile.name}`}
-                />
-              ) : (
-                <p>No Image</p>
-              )}
-            </div>
-            <div className="profile-info">
-              <p>Name: {profile.name}</p>
-              <p>Age: {profile.age}</p>
-              <p>Location: {profile.location}</p>
-            </div>
-            <div className="profile-buttons">
-              <button onClick={() => handleDislike(profile._id)}>
-                👎 Dislike
-              </button>
-              <button onClick={() => handleLike(profile._id)}>👍 Like</button>
-            </div>
-          </div>
-        ))}
+    <div className="profile-card">
+      <div className="profile-image">
+        {currentProfile.profileImage ? (
+          <img
+            src={currentProfile.profileImage}
+            alt={`Profile of ${currentProfile.name}`}
+          />
+        ) : (
+          <p>No Image</p>
+        )}
       </div>
-    </>
+      <div className="profile-info">
+        <p>Name: {currentProfile.name}</p>
+        <p>Age: {currentProfile.age}</p>
+        <p>Location: {currentProfile.location}</p>
+      </div>
+      <div className="profile-buttons">
+        <button onClick={handleDislike}>👎 Dislike</button>
+        <button onClick={handleLike}>👍 Like</button>
+      </div>
+    </div>
   );
 }
