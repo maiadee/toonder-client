@@ -5,14 +5,14 @@ import Signup from './components/Signup/Signup'
 import Login from './components/Login/Login'
 import CreateProfile from './components/CreateProfile/CreateProfile'
 import UpdateProfile from './components/UpdateProfile/UpdateProfile'
-// import NavMenu from './components/Nav/Nav'
+import NavMenu from './components/Nav/Nav'
 
 function App() {
 
   return (
     <>
       <main>
-        {/* <NavMenu /> */}
+        <NavMenu/>
         <Routes>
           <Route path="/profiles/index" element={<IndexCard />} />
           <Route path="/profiles/:id" element={<FullProfileCard />} />
