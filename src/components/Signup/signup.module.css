@@ -10,8 +10,7 @@ html, body {
     padding: 0;
     width: 100vw;
     height: 100vh;
-    font-family: 'Poppins', sans-serif;
-    background: url("/images/signup.jpeg") no-repeat center center;
+    background: url("/images/signup.webp") no-repeat center center;
     background-size: cover;
     position: relative;
     font-family: 'New Walt Disney', sans-serif !important; 
