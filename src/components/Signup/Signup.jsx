@@ -4,6 +4,7 @@ import { setToken } from '../../utils/auth'
 import { getUserFromToken } from '../../utils/auth'
 import { UserContext } from '../../contexts/UserContext'
 import { signup } from '../../services/userService'; 
+import styles from './signup.module.css'
 
 
 
@@ -44,6 +45,7 @@ const [errors, setErrors] = useState({})
 
   return (
 <section>
+<div className={styles.homepage}/>
     <h1>♥️ Sign Up to Toonder ♥️</h1>
     <form onSubmit={handleSubmit}>
 
