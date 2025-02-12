@@ -18,7 +18,6 @@ export default function NavMenu() {
     return (
         <nav className={styles.navbar}>
             <div className={styles.navContainer}>
-                {/* Clickable Logo */}
                 <img 
                     src="/images/logo.png" 
                     alt="Toonder Logo" 
