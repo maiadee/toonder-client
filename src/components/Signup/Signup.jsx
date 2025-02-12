@@ -84,7 +84,7 @@ export default function Signup(){
                         <p className='error-message'>Passwords do not match</p>
                     }
                 </div>
-                <button className={styles.button} disabled={formData.password === '' || formData.password !== formData.confirmPassword} type="submit">Submit</button>
+                <button className={styles.button} disabled={formData.password === '' || formData.password !== formData.confirmPassword} type="submit">Sign Up</button>
             </form>
         </section>
     );
