@@ -15,6 +15,8 @@ export default function NavMenu() {
         setMenuOpen(false);
     };
 
+    console.log(user)
+
     return (
         <nav className={styles.navbar}>
             <div className={styles.navContainer}>
@@ -29,8 +31,9 @@ export default function NavMenu() {
                     <NavLink to="/" className={styles.link} onClick={() => setMenuOpen(false)}>Home</NavLink>
                     {user ? (
                         <>
+                    
                             <NavLink to="/profiles/matches" className={styles.link} onClick={() => setMenuOpen(false)}>View Matches</NavLink>
-                            <NavLink to="/profiles/:id/update" className={styles.link} onClick={() => setMenuOpen(false)}>Update Profile</NavLink>
+                            <NavLink to={`/profiles/${user.profile}/update`} className={styles.link} onClick={() => setMenuOpen(false)}>Update Profile</NavLink>
                             <button onClick={signOut} className={styles.signOutButton}>Sign Out</button>
                         </>
                     ) : (
