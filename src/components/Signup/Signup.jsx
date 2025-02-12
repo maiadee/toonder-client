@@ -3,18 +3,13 @@ import { useNavigate } from 'react-router';
 import { setToken } from '../../utils/auth';
 import { getUserFromToken } from '../../utils/auth';
 import { UserContext } from '../../contexts/UserContext';
-import { signup } from '../../services/userService';
-import styles from './signup.module.css';
-export default function Signup(){
-    const { setUser } = useContext(UserContext);
+
     const [formData, setFormData] = useState ({
         username: '',
         email: '',
         password: '',
         confirmPassword: '',
-    });
-    const [errors, setErrors] = useState({});
-    const navigate = useNavigate();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -26,19 +21,12 @@ export default function Signup(){
             setErrors(error.response.data.errors);
         }
     };
+
     const handleChange = (e) => {
         setErrors({ ...errors, [e.target.name]: '' });
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
-    return (
-        <section className={styles.container}>
-            <h1>💕 Sign Up to Toonder 💕</h1>
-            <form onSubmit={handleSubmit}>
-                <div className={styles['form-group']}>
-                    <label htmlFor="email">Email</label>
-                    <input
-                        type="email"
-                        name="email"
+
                         id="email"
                         placeholder="Enter an email address"
                         required
@@ -48,9 +36,7 @@ export default function Signup(){
                 </div>
                 <div className={styles['form-group']}>
                     <label htmlFor="username">Username</label>
-                    <input
-                        type="text"
-                        name="username"
+
                         id="username"
                         placeholder="Enter a username"
                         required
@@ -60,9 +46,7 @@ export default function Signup(){
                 </div>
                 <div className={styles['form-group']}>
                     <label htmlFor="password">Password</label>
-                    <input
-                        type="password"
-                        name="password"
+
                         id="password"
                         placeholder="Enter a password"
                         required
@@ -72,9 +56,7 @@ export default function Signup(){
                 </div>
                 <div className={styles['form-group']}>
                     <label htmlFor="confirmPassword">Confirm password</label>
-                    <input
-                        type="password"
-                        name="confirmPassword"
+
                         id="confirmPassword"
                         placeholder="Re-type the password"
                         required
@@ -88,4 +70,4 @@ export default function Signup(){
             </form>
         </section>
     );
-}
+<

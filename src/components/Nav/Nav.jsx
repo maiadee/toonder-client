@@ -45,7 +45,7 @@ export default function NavMenu() {
                     {user ? (
                         <>
                             <NavLink to={`/profiles/${user.profile}/update`} className={styles.link} onClick={() => setMenuOpen(false)}>Update Profile</NavLink>
-                            <NavLink to="/" className={styles.link} onClick={signOut}>Sign Out</NavLink>
+
                         </>
                     ) : (
                         <>

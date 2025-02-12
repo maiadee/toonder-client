@@ -63,6 +63,7 @@ export default function FullProfileCard() {
 
   return (
     <div className="full-profile-card">
+      {profile.profileImage && <img src={profile.profileImage} alt="Profile Image 1" className="profile-image" />}
       <h2>{profile.name}</h2>
       <p><strong>Age:</strong> {profile.age}</p>
       <p><strong>Location:</strong> {profile.location}</p>
@@ -70,6 +71,7 @@ export default function FullProfileCard() {
       <p><strong>Bio:</strong> {profile.bio}</p>
       <p><strong>Passions:</strong> {profile.passions || "Not specified"}</p>
       <p><strong>Icks:</strong> {profile.icks || "Not specified"}</p>
+      
       
       <div className="profile-buttons">
         <button onClick={handleDislike} disabled={isLoading}>👎</button>

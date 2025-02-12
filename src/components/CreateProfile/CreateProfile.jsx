@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
 import { profileCreate } from "../../services/profileService";
+import ImageUpload from '../ImageUpload/ImageUpload'
 
 export default function CreateProfile() {
   const { user } = useContext(UserContext);
@@ -14,13 +15,13 @@ export default function CreateProfile() {
     bio: "",
     gender: "",
     preferences: "",
-    image1: "",
-    image2: "",
+    profileImage: "",
     passions: "",
     icks: "",
   });
 
   const [errors, setErrors] = useState({});
+  const [isUploading, setIsUploading] = useState(false)
 
   useEffect(() => {
     if (!user) {
@@ -32,13 +33,14 @@ export default function CreateProfile() {
     event.preventDefault();
     try {
       formData.age = Number(formData.age);
-      console.log(formData);
+      console.log("Submitting profile:", formData);
       await profileCreate(formData);
       navigate("/profiles/index");
     } catch (error) {
       setErrors(error.response?.data?.errors || { general: "Failed to create profile." });
     }
   };
+  
 
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -49,7 +51,15 @@ export default function CreateProfile() {
       <h2>Create Profile</h2>
       {errors.general && <p style={{ color: "red" }}>{errors.general}</p>}
       <form onSubmit={handleSubmit}>
-        <label>Image 1:</label>
+
+      <ImageUpload 
+          errors={errors} 
+          setErrors={setErrors}
+          formData={formData} 
+          setFormData={setFormData}
+          isUploading={isUploading}
+          setIsUploading={setIsUploading}
+        />
 
         <label>Name:</label>
         <input id="name" type="text" name="name" value={formData.name} onChange={handleChange} required />
@@ -97,7 +107,7 @@ export default function CreateProfile() {
           onChange={handleChange}
         />
 
-        <label>Image 2:</label>
+    
 
         <button type="submit">Create Profile</button>
       </form>
