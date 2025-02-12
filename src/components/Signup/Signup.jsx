@@ -32,7 +32,7 @@ export default function Signup(){
     };
     return (
         <section className={styles.container}>
-            <h1>:two_hearts: Sign Up to Toonder :two_hearts:</h1>
+            <h1>💕 Sign Up to Toonder 💕</h1>
             <form onSubmit={handleSubmit}>
                 <div className={styles['form-group']}>
                     <label htmlFor="email">Email</label>
