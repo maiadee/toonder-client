@@ -1,16 +1,38 @@
 import { useState, useEffect } from "react";
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
 import {
   profileIndex,
   profileLike,
   profileDislike,
+  profileShow,
 } from "../../services/profileService";
 import Spinner from "../Spinner/Spinner";
+import styles from "./index.module.css";
+
+const modalStyle = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 300,
+  height: 400,
+  bgcolor: "background.paper",
+  border: "0 solid #000",
+  boxShadow: 24,
+  p: 4,
+  borderRadius: 5,
+};
 
 export default function IndexCard() {
   // State
-  const [currentProfile, setCurrentProfile] = useState(null); // single profile
+  const [currentProfile, setCurrentProfile] = useState(null); // Single profile
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [open, setOpen] = useState(false); // Modal state
+  const [profileDetails, setProfileDetails] = useState({}); // Full profile details for modal
 
   // Fetch profiles
   const fetchProfile = async () => {
@@ -60,6 +82,20 @@ export default function IndexCard() {
     }
   };
 
+  // Handle Image Click to View Full Profile
+  const handleViewProfile = async (profileId) => {
+    try {
+      setOpen(true); // Open the modal
+      const data = await profileShow(profileId); // Fetch full profile details
+      setProfileDetails(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // Close Modal
+  const handleClose = () => setOpen(false);
+
   // Render loading state
   if (isLoading) return <Spinner />;
 
@@ -71,26 +107,70 @@ export default function IndexCard() {
 
   // Render profiles
   return (
-    <div className="profile-card">
-      <div className="profile-image">
-        {currentProfile.profileImage ? (
-          <img
-            src={currentProfile.profileImage}
-            alt={`Profile of ${currentProfile.name}`}
-          />
-        ) : (
-          <p>No Image</p>
-        )}
-      </div>
-      <div className="profile-info">
-        <p>Name: {currentProfile.name}</p>
-        <p>Age: {currentProfile.age}</p>
-        <p>Location: {currentProfile.location}</p>
-      </div>
-      <div className="profile-buttons">
-        <button onClick={handleDislike}>👎 Dislike</button>
-        <button onClick={handleLike}>👍 Like</button>
-      </div>
-    </div>
+    <>
+      <section className={styles.indexContainer}>
+        <div className={styles.indexCard}>
+          <div
+            className={styles.profileImage}
+            onClick={() => handleViewProfile(currentProfile._id)} // Trigger modal on image click
+          >
+            {currentProfile.profileImage ? (
+              <img
+                src={currentProfile.profileImage}
+                alt={`Profile of ${currentProfile.name}`}
+              />
+            ) : (
+              <div className={styles.placeholderImage}>
+                <p>No Image</p>
+              </div>
+            )}
+          </div>
+          <div className={styles.profileIndexInfo}>
+            <h4>{currentProfile.name}</h4>
+            <p>
+              {currentProfile.age}, {currentProfile.location}
+            </p>
+          </div>
+          <div className={styles.indexCardButtons}>
+            <button onClick={handleDislike}>👎</button>
+            <button onClick={handleLike}>👍</button>
+          </div>
+        </div>
+      </section>
+
+      {/* Modal for full profile */}
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={modalStyle}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            {profileDetails.name}
+          </Typography>
+          {profileDetails.profileImage && (
+            <img
+              src={profileDetails.profileImage}
+              alt={`${profileDetails.name}'s profile`}
+              style={{ width: "100%", borderRadius: "8px" }}
+            />
+          )}
+          <Typography
+            id="modal-modal-description"
+            sx={{ mt: 2 }}
+            component="div"
+          >
+            <p>
+              {profileDetails.age}, {profileDetails.gender},{" "}
+              {profileDetails.location}
+            </p>
+            <div>{profileDetails.bio}</div>
+            <div>{profileDetails.passions}</div>
+            <div>{profileDetails.icks}</div>
+          </Typography>
+        </Box>
+      </Modal>
+    </>
   );
 }
