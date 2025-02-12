@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { NavLink } from 'react-router-dom';  
+import { NavLink, useNavigate } from 'react-router-dom';  
 import { UserContext } from '../../contexts/UserContext';
 import { removeToken } from '../../utils/auth';
 import styles from './nav.module.css';
@@ -7,6 +7,7 @@ import styles from './nav.module.css';
 export default function NavMenu() {
     const { user, setUser } = useContext(UserContext);
     const [menuOpen, setMenuOpen] = useState(false);
+    const navigate = useNavigate();
 
     const signOut = () => {
         removeToken();
@@ -17,6 +18,14 @@ export default function NavMenu() {
     return (
         <nav className={styles.navbar}>
             <div className={styles.navContainer}>
+                {/* Clickable Logo */}
+                <img 
+                    src="/images/logo.png" 
+                    alt="Toonder Logo" 
+                    className={styles.logo} 
+                    onClick={() => navigate("/")} 
+                />
+
                 <nav className={styles.navLinks}>
                     <NavLink to="/" className={styles.link} onClick={() => setMenuOpen(false)}>Home</NavLink>
                     {user ? (
@@ -36,4 +45,3 @@ export default function NavMenu() {
         </nav>
     );
 }
-
