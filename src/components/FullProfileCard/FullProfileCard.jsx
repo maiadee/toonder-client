@@ -3,6 +3,8 @@ import { profileShow, profileLike, profileDislike } from "../../services/profile
 import { useParams } from "react-router-dom";
 import Spinner from "../Spinner/Spinner";
 
+
+
 export default function FullProfileCard() {
   const { id } = useParams();
   const [profile, setProfile] = useState(null);
@@ -62,6 +64,7 @@ export default function FullProfileCard() {
   if (!profile) return <p>Profile not found.</p>;
 
   return (
+    
     <div className="full-profile-card">
       <h2>{profile.name}</h2>
       <p><strong>Age:</strong> {profile.age}</p>
@@ -74,5 +77,6 @@ export default function FullProfileCard() {
           <button onClick={handleLike} disabled={isLoading}>👍</button>
         </div>
     </div>
+  
   );
 }

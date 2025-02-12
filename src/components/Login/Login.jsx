@@ -4,6 +4,7 @@ import { setToken } from '../../utils/auth'
 import { getUserFromToken } from '../../utils/auth'
 import { UserContext } from '../../contexts/UserContext'
 import { login } from '../../services/userService'; 
+import NavMenu from '../Nav/Nav'
 
 
 export default function Login() {
@@ -41,6 +42,7 @@ export default function Login() {
 
     return (
         <section>
+            <NavMenu />
             <h1>Welcome back!</h1>
             <p>♥️ Log in ♥️</p>
             <form onSubmit={handleSubmit}>
