@@ -1,21 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+@font-face {
+    font-family: 'New Walt Disney';
+    src: url('/fonts/NewWaltDisneyFontRegular-BPen.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 
 html, body {
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'New Walt Disney', sans-serif;
     background: url("/images/signup.jpeg") no-repeat center center;
     background-size: cover;
     display: flex;
     justify-content: center;
     align-items: flex-start;
     height: 100vh;
+    font-size: 1.2rem;
 }
 
-/* Main form container */
 .container {
     width: 90%;
-    max-width: 900px; /* Wider form */
+    max-width: 900px;
     background: rgba(255, 255, 255, 0.15);
     padding: 35px;
     border-radius: 12px;
@@ -26,14 +31,12 @@ html, body {
     margin-top: 120px;
 }
 
-/* Title */
 .title {
     font-size: 2em;
     color: white;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-/* Form Layout */
 .form {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -41,20 +44,18 @@ html, body {
     align-items: center;
 }
 
-/* Full-width fields */
 .fullWidth {
     grid-column: span 2;
 }
 
-/* Form Fields */
 .formGroup {
     display: flex;
     flex-direction: column;
     width: 100%;
     box-sizing: border-box;
+    font-family: 'New Walt Disney', sans-serif;
 }
 
-/* Labels */
 .formGroup label {
     font-size: 1.1em;
     color: white;
@@ -62,7 +63,6 @@ html, body {
     margin-bottom: 6px;
 }
 
-/* Inputs, Selects, and Textareas */
 .formGroup input,
 .formGroup textarea,
 .formGroup select {
@@ -75,6 +75,7 @@ html, body {
     color: white;
     backdrop-filter: blur(5px);
     box-sizing: border-box;
+    font-family: 'New Walt Disney', sans-serif;
 }
 
 .formGroup input,
@@ -88,7 +89,6 @@ html, body {
     resize: none;
 }
 
-/* Button */
 .button {
     background: rgba(255, 255, 255, 0.3);
     color: white;
@@ -101,6 +101,8 @@ html, body {
     transition: background 0.3s ease, transform 0.2s ease;
     width: 100%;
     grid-column: span 2;
+    font-family: 'New Walt Disney', sans-serif;
+    font-size: 1.5rem;
 }
 
 .button:hover {
@@ -108,7 +110,6 @@ html, body {
     transform: translateY(-2px);
 }
 
-/* Error message */
 .error {
     color: red;
     font-size: 1em;
