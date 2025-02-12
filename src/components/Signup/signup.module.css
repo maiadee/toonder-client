@@ -1,97 +1,22 @@
 
-
-.homepage {
-    background: url("/images/homepage.jpeg") no-repeat center center;
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    background: url("/images/signup.jpeg") no-repeat center center;
     background-size: cover;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
+    position: relative;
 }
 
-html, body {
-    margin: 0;
-    padding: 0;
-    width: 100vw;
-    height: 100vh;
-}
-
+/* Signup Container */
 .container {
-    width: 100%;
-    max-width: 400px;
-    background: rgba(255, 255, 255, 0.9); 
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-}
-
-.container h1 {
-    font-size: 2.5em;
-    color: black;
-    margin-bottom: 20px;
+    width: 90%;
+    max-width: 450px;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
     text-align: center;
-}
+    display: flex;
 
-.form-group {
-    margin-bottom: 15px;
-    width: 100%;
-}
-
-.form-group label {
-    font-size: 1.2em;
-    color: black;
-    margin-bottom: 5px;
-    display: block;
-}
 
 .form-group input {
-    width: 100%;
-    padding: 10px;
-    font-size: 1.1em;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-.container button {
-    background-color: white;
-    color: black;
-    font-weight: bold;
-    border: 2px solid black;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    display: block;
-}
-
-.container p {
-    font-size: 1em;
-    color: black;
-    margin-top: 15px;
-    text-align: center;
-}
-
-.container p a {
-    color: blue;
-    text-decoration: underline;
-    transition: color 0.3s ease;
-}
-

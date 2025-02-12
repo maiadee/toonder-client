@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';  
+import { NavLink, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
 import { removeToken } from '../../utils/auth';
 import styles from './nav.module.css';
@@ -13,28 +13,39 @@ export default function NavMenu() {
         removeToken();
         setUser(null);
         setMenuOpen(false);
+        navigate('/');
     };
 
-    console.log(user)
+    console.log(user);
 
     return (
         <nav className={styles.navbar}>
             <div className={styles.navContainer}>
-                <img 
-                    src="/images/logo.png" 
-                    alt="Toonder Logo" 
-                    className={styles.logo} 
-                    onClick={() => navigate("/")} 
+
+
+                <div className={styles.leftLinks}>
+                    <NavLink to="/" className={styles.link} onClick={() => setMenuOpen(false)}>Home</NavLink>
+                    {user && (
+                        <>
+                            <NavLink to="/profiles/index" className={styles.link} onClick={() => setMenuOpen(false)}>Match Now</NavLink>
+                            <NavLink to="/profiles/matches" className={styles.link} onClick={() => setMenuOpen(false)}>View Matches</NavLink>
+                        </>
+                    )}
+                </div>
+
+
+                <img
+                    src="/images/logo.png"
+                    alt="Toonder Logo"
+                    className={styles.logo}
+                    onClick={() => navigate("/")}
                 />
 
-                <nav className={styles.navLinks}>
-                    <NavLink to="/" className={styles.link} onClick={() => setMenuOpen(false)}>Home</NavLink>
+                <div className={styles.rightLinks}>
                     {user ? (
                         <>
-                    
-                            <NavLink to="/profiles/matches" className={styles.link} onClick={() => setMenuOpen(false)}>View Matches</NavLink>
                             <NavLink to={`/profiles/${user.profile}/update`} className={styles.link} onClick={() => setMenuOpen(false)}>Update Profile</NavLink>
-                            <NavLink onClick={signOut} className={styles.signOutButton}>Sign Out</NavLink>
+
                         </>
                     ) : (
                         <>
@@ -42,7 +53,7 @@ export default function NavMenu() {
                             <NavLink to="/login" className={styles.link} onClick={() => setMenuOpen(false)}>Log In</NavLink>
                         </>
                     )}
-                </nav>
+                </div>
             </div>
         </nav>
     );

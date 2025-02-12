@@ -5,12 +5,13 @@ const BASE_URL = import.meta.env.VITE_API_URL + "/profiles";
 
 export const profileIndex = async () => {
   try {
-    const res = await axios.get(BASE_URL, {
+    const res = await axios.get(BASE_URL + `/index`, {
       headers: {
         Authorization: `Bearer ${getToken()}`,
       },
     });
-    return res.data || [];
+    console.log(res);
+    return res.data || null;
   } catch (error) {
     console.log(error);
     throw error;
