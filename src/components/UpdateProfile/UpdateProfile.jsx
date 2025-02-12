@@ -15,6 +15,8 @@ export default function UpdateProfile() {
         bio: "",
         gender: "",
         preferences: "",
+        passions: "",
+        icks: "",
     });
 
     const [errors, setErrors] = useState({});
@@ -38,6 +40,8 @@ export default function UpdateProfile() {
                     bio: data.bio || "",
                     gender: data.gender || "",
                     preferences: data.preferences || "",
+                    passions: data.passions || "",
+                    icks: data.icks || "",
                 });
             })
             .catch(() => {
@@ -91,6 +95,24 @@ export default function UpdateProfile() {
                     <option value="Female">Female</option>
                     <option value="No Preference">No Preference</option>
                 </select>
+
+                <label>Passions:</label>
+                <input
+                    type="text"
+                    name="passions"
+                    placeholder="E.g., Music, Traveling, Fitness"
+                    value={formData.passions}
+                    onChange={handleChange}
+                />
+
+                <label>Icks:</label>
+                <input
+                    type="text"
+                    name="icks"
+                    placeholder="E.g., Loud chewing, Being late"
+                    value={formData.icks}
+                    onChange={handleChange}
+                />
 
                 <button type="submit">Update Profile</button>
             </form>
