@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
 import { profileUpdate, profileShow } from "../../services/profileService";
+import ImageUpload from '../ImageUpload/ImageUpload'
 
 export default function UpdateProfile() {
     const { user } = useContext(UserContext);
@@ -17,9 +18,11 @@ export default function UpdateProfile() {
         preferences: "",
         passions: "",
         icks: "",
+        profileImage:""
     });
 
     const [errors, setErrors] = useState({});
+    const [isUploading, setIsUploading] = useState(false);
 
     useEffect(() => {
         if (!user) {
@@ -43,6 +46,7 @@ export default function UpdateProfile() {
                     preferences: data.preferences || "",
                     passions: data.passions || "",
                     icks: data.icks || "",
+                    profileImage: data.profileImage || ""
                 });
             })
             .catch(() => {
@@ -57,18 +61,30 @@ export default function UpdateProfile() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await profileUpdate(id, formData);
-            navigate("/profiles/index"); 
+          console.log("Updating profile:", formData);
+          await profileUpdate(id, formData);
+          navigate("/profiles/index"); 
         } catch (error) {
-            setErrors(error.response?.data?.errors || { general: "Failed to update profile." });
+          setErrors(error.response?.data?.errors || { general: "Failed to update profile." });
         }
-    };
+      };
+      
+
 
     return (
         <>
             <h1>Update Your Profile</h1>
 
             <form onSubmit={handleSubmit}>
+                <ImageUpload 
+                    errors={errors} 
+                    setErrors={setErrors}
+                    formData={formData} 
+                    setFormData={setFormData}
+                    isUploading={isUploading}
+                    setIsUploading={setIsUploading}
+                />
+                
                 <label>Name:</label>
                 <input type="text" name="name" value={formData.name} onChange={handleChange} required />
 
