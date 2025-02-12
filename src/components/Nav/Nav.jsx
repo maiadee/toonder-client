@@ -8,7 +8,6 @@ export default function NavMenu() {
 
     const [menuOpen, setMenuOpen] = useState(false)
 
-    const toggleMenu = () => setMenuOpen(!menuOpen)
 
     const signOut = () => {
         removeToken()
@@ -18,22 +17,14 @@ export default function NavMenu() {
 
     return (
         <nav>
-            
-            <button onClick={toggleMenu}>
-                <div>-</div>
-                <div>-</div>
-                <div>-</div>
-            </button>
-
-
-            {menuOpen && (
+    
                 <div>
                     <nav>
                         <NavLink to="/" onClick={() => setMenuOpen(false)}>Home</NavLink>
                         {user ? (
                             <>
                                 <NavLink to="/profiles/matches" onClick={() => setMenuOpen(false)}>View Matches</NavLink>
-                                <NavLink to="/profiles" onClick={() => setMenuOpen(false)}>Update Profile</NavLink>
+                                <NavLink to="/profiles/:id/update" onClick={() => setMenuOpen(false)}>Update Profile</NavLink>
                                 <button onClick={signOut}>Sign Out</button>
                             </>
                         ) : (
@@ -44,7 +35,7 @@ export default function NavMenu() {
                         )}
                     </nav>
                 </div>
-            )}
+           
         </nav>
     )
 }
