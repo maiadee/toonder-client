@@ -20,9 +20,9 @@ export default function NavMenu() {
         <nav>
             
             <button onClick={toggleMenu}>
-                <div></div>
-                <div></div>
-                <div></div>
+                <div>-</div>
+                <div>-</div>
+                <div>-</div>
             </button>
 
 
@@ -32,8 +32,8 @@ export default function NavMenu() {
                         <NavLink to="/" onClick={() => setMenuOpen(false)}>Home</NavLink>
                         {user ? (
                             <>
-                                <NavLink to="/matches" onClick={() => setMenuOpen(false)}>View Matches</NavLink>
-                                <NavLink to="/profile" onClick={() => setMenuOpen(false)}>Update Profile</NavLink>
+                                <NavLink to="/profiles/matches" onClick={() => setMenuOpen(false)}>View Matches</NavLink>
+                                <NavLink to="/profiles" onClick={() => setMenuOpen(false)}>Update Profile</NavLink>
                                 <button onClick={signOut}>Sign Out</button>
                             </>
                         ) : (

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
 import { profileCreate } from '../../services/profileService'; 
 
+
  
 
 export default function CreateProfile() {
@@ -47,6 +48,7 @@ export default function CreateProfile() {
 
     return (
         <>
+      
             <h2>Create Profile</h2>
             {errors.general && <p style={{ color: "red" }}>{errors.general}</p>}
             <form onSubmit={handleSubmit}>
