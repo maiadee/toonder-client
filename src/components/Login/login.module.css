@@ -1,11 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+@font-face {
+    font-family: 'New Walt Disney';
+    src: url('/fonts/NewWaltDisneyFontRegular-BPen.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 
 html, body {
     margin: 0;
     padding: 0;
     width: 100vw;
     height: 100vh;
-    background: url("/images/signup.jpeg") no-repeat center center;
+    background: url("/images/signup.webp") no-repeat center center;
     background-size: cover;
     display: flex;
     justify-content: center;
