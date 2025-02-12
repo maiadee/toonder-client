@@ -1,91 +1,106 @@
-import { useEffect, useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../../contexts/UserContext';
-import { profileCreate } from '../../services/profileService'; 
-
-
- 
+import { useEffect, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../contexts/UserContext";
+import { profileCreate } from "../../services/profileService";
 
 export default function CreateProfile() {
-    const { user } = useContext(UserContext);
-    const navigate = useNavigate();
+  const { user } = useContext(UserContext);
+  const navigate = useNavigate();
 
-    const [formData, setFormData] = useState({
-        name: "",
-        age: "",
-        location: "",
-        bio: "",
-        gender: "",
-        preferences: "",
-        image1: "",
-        image2: "",
-    });
+  const [formData, setFormData] = useState({
+    name: "",
+    age: "",
+    location: "",
+    bio: "",
+    gender: "",
+    preferences: "",
+    image1: "",
+    image2: "",
+    passions: "",
+    icks: "",
+  });
 
-    const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({});
 
-    useEffect(() => {
-        if (!user) {
-            navigate('/login');
-        }
-    }, [user, navigate]);
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, [user, navigate]);
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        try {
-            formData.age = Number(formData.age)
-            console.log(formData)
-            await profileCreate(formData)
-            navigate('/profiles/index');
-        
-        } catch (error) {
-            setErrors(error.response.data.errors || { general: "Failed to create profile." });
-        }
-    };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      formData.age = Number(formData.age);
+      console.log(formData);
+      await profileCreate(formData);
+      navigate("/profiles/index");
+    } catch (error) {
+      setErrors(error.response?.data?.errors || { general: "Failed to create profile." });
+    }
+  };
 
-    const handleChange = (event) => {
-        setFormData({ ...formData, [event.target.name]: event.target.value });
-    };
+  const handleChange = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
+  };
 
-    return (
-        <>
-      
-            <h2>Create Profile</h2>
-            {errors.general && <p style={{ color: "red" }}>{errors.general}</p>}
-            <form onSubmit={handleSubmit}>
-                <label>Image 1:</label>
+  return (
+    <>
+      <h2>Create Profile</h2>
+      {errors.general && <p style={{ color: "red" }}>{errors.general}</p>}
+      <form onSubmit={handleSubmit}>
+        <label>Image 1:</label>
 
-                <label>Name:</label>
-                <input id="name" type="text" name="name" value={formData.name} onChange={handleChange} required />
+        <label>Name:</label>
+        <input id="name" type="text" name="name" value={formData.name} onChange={handleChange} required />
 
-                <label>Age:</label>
-                <input id="age" type="number" name="age" value={formData.age} onChange={handleChange} required />
+        <label>Age:</label>
+        <input id="age" type="number" name="age" value={formData.age} onChange={handleChange} required />
 
-                <label>Location:</label>
-                <input id="location" type="text" name="location" value={formData.location} onChange={handleChange} required />
+        <label>Location:</label>
+        <input id="location" type="text" name="location" value={formData.location} onChange={handleChange} required />
 
-                <label>Bio:</label>
-                <textarea id="bio" name="bio" value={formData.bio} onChange={handleChange} />
+        <label>Bio:</label>
+        <textarea id="bio" name="bio" value={formData.bio} onChange={handleChange} />
 
-                <label>Gender:</label>
-                <select name="gender" value={formData.gender} onChange={handleChange} required>
-                    <option value="" disabled>Select Gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                </select>
+        <label>Gender:</label>
+        <select name="gender" value={formData.gender} onChange={handleChange} required>
+          <option value="" disabled>Select Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
 
-                <label>Looking For:</label>
-                <select name="preferences" value={formData.preferences} onChange={handleChange} required>
-                    <option value="" disabled>Select Preference</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="No Preference">No Preference</option>
-                </select>
+        <label>Looking For:</label>
+        <select name="preferences" value={formData.preferences} onChange={handleChange} required>
+          <option value="" disabled>Select Preference</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="No Preference">No Preference</option>
+        </select>
 
-                <label>Image 2:</label>
+        <label>Passions:</label>
+        <input
+          type="text"
+          name="passions"
+          placeholder="E.g., Music, Traveling, Fitness"
+          value={formData.passions}
+          onChange={handleChange}
+        />
 
-                <button type="submit">Create Profile</button>
-            </form>
-        </>
-    );
-};
+        <label>Icks:</label>
+        <input
+          type="text"
+          name="icks"
+          placeholder="E.g., Loud chewing, Being late"
+          value={formData.icks}
+          onChange={handleChange}
+        />
+
+        <label>Image 2:</label>
+
+        <button type="submit">Create Profile</button>
+      </form>
+    </>
+  );
+}
