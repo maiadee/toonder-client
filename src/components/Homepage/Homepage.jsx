@@ -10,15 +10,14 @@ export default function Homepage() {
   return (
     <div className={styles.homepage}>
       <img className="logo" src="/images/ToonderWhite.png" alt="Toonder Logo" />
-<div className={styles.content}>
+      <div className={styles.content}>
         {!user && (
           <>
-             {/* <p>Sign Up To Find Love Today! 💕</p> */}
-            <button onClick={() => navigate("/signup")}>Sign Up</button> 
+            <p className={styles.message}>💖 Your fairytale journey awaits you! 💖</p>
+            <button className={styles.signupButton} onClick={() => navigate("/signup")}>Sign Up</button> 
           </>
         )}
-        </div>
       </div>
+    </div>
   );
 }
-
