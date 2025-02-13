@@ -22,7 +22,7 @@ const modalStyle = {
   bgcolor: "rgba(255, 255, 255, 0.9)",
   border: "0 solid #000",
   boxShadow: 24,
-  p: 4,
+  p: 5,
   borderRadius: 2,
 };
 
@@ -165,7 +165,7 @@ export default function IndexCard() {
                   height: "200px",
                   borderRadius: "8px",
                   objectFit: "cover",
-                  margin: "8px",
+                  margin: "5px",
                 }}
               />
             </div>
@@ -179,17 +179,26 @@ export default function IndexCard() {
               id="modal-modal-title"
               variant="h6"
               component="h2"
-              style={{ fontWeight: "bold", fontSize: "25px" }}
+              style={{ fontWeight: "bold", fontSize: "20px" }}
             >
               {profileDetails.name}
             </Typography>
-            <p style={{ fontSize: "16px" }}>
+            <p style={{ fontSize: "14px" }}>
               {profileDetails.age}, {profileDetails.gender},{" "}
               {profileDetails.location}
             </p>
-            <div style={{ fontSize: "16px" }}>{profileDetails.bio}</div>
-            <div style={{ fontSize: "16px" }}>{profileDetails.passions}</div>
-            <div style={{ fontSize: "16px" }}>{profileDetails.icks}</div>
+            <div style={{ fontSize: "13px" }}>
+              <strong>Bio: </strong>
+              {profileDetails.bio}
+            </div>
+            <div style={{ fontSize: "13px" }}>
+              <strong>Passions: </strong>
+              {profileDetails.passions}
+            </div>
+            <div style={{ fontSize: "13px" }}>
+              <strong>Icks: </strong>
+              {profileDetails.icks}
+            </div>
           </Typography>
         </Box>
       </Modal>
