@@ -1,5 +1,6 @@
 import axios from 'axios'
 import Spinner from '../Spinner/Spinner'
+import styles from './ImageUpload.module.css'
 
 export default function ImageUpload({ errors, setErrors, formData, setFormData, isUploading, setIsUploading }){
 
@@ -35,7 +36,7 @@ export default function ImageUpload({ errors, setErrors, formData, setFormData, 
   {isUploading && <Spinner />}
   
   {formData.profileImage && (
-    <img src={formData.profileImage} alt="Preview" className="image-preview" />
+    <img src={formData.profileImage} alt="Preview" className={styles["image-preview"]} />
   )}
   
   <input 
