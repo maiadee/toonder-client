@@ -90,7 +90,6 @@ body {
   transition: background-color 0.2s;
 }
 
-
 .indexCardButtons .likeButton {
   background-color: rgb(135, 186, 135);
 }
@@ -99,7 +98,6 @@ body {
   background-color: rgb(87, 148, 87); 
 }
 
-
 .indexCardButtons .dislikeButton {
   background-color: rgba(226, 99, 67, 0.891);
 }
@@ -107,7 +105,6 @@ body {
 .indexCardButtons .dislikeButton:hover {
   background-color: rgba(237, 76, 36, 0.891); 
 }
-
 
 .indexCardButtons button:hover {
   background-color: #ccc;

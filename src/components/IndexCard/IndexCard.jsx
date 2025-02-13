@@ -28,14 +28,13 @@ const modalStyle = {
 };
 
 export default function IndexCard() {
-  // State
-  const [currentProfile, setCurrentProfile] = useState(null); // Single profile
+  
+  const [currentProfile, setCurrentProfile] = useState(null); 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [open, setOpen] = useState(false); // Modal state
   const [profileDetails, setProfileDetails] = useState({}); // Full profile details for modal
 
-  // Fetch profiles
   const fetchProfile = async () => {
     setIsLoading(true);
     setError("");
@@ -52,16 +51,15 @@ export default function IndexCard() {
   };
 
   useEffect(() => {
-    fetchProfile(); // Fetch a profile when the component loads
+    fetchProfile(); 
   }, []);
 
-  // Handle Like
   const handleLike = async () => {
     if (!currentProfile) return; // No profile to like
     setIsLoading(true);
     try {
       await profileLike(currentProfile._id); // Like the current profile
-      fetchProfile(); // Fetch the next profile after liking
+      fetchProfile(); 
     } catch (error) {
       console.error(error);
     } finally {
@@ -69,13 +67,12 @@ export default function IndexCard() {
     }
   };
 
-  // Handle Dislike
   const handleDislike = async () => {
-    if (!currentProfile) return; // No profile to dislike
+    if (!currentProfile) return; 
     setIsLoading(true);
     try {
-      await profileDislike(currentProfile._id); // Dislike the current profile
-      fetchProfile(); // Fetch the next profile after disliking
+      await profileDislike(currentProfile._id); 
+      fetchProfile(); 
     } catch (error) {
       console.error(error);
     } finally {
@@ -83,18 +80,16 @@ export default function IndexCard() {
     }
   };
 
-  // Handle Image Click to View Full Profile
   const handleViewProfile = async (profileId) => {
     try {
       setOpen(true); // Open the modal
-      const data = await profileShow(profileId); // Fetch full profile details
+      const data = await profileShow(profileId); 
       setProfileDetails(data);
     } catch (error) {
       console.error(error);
     }
   };
 
-  // Close Modal
   const handleClose = () => setOpen(false);
 
   // Render loading state
@@ -107,7 +102,6 @@ export default function IndexCard() {
   if (!currentProfile)
     return <p className="pageAlert">No profiles available at the moment.</p>;
 
-  // Render profiles
   return (
     <>
       <section className={styles.indexContainer}>

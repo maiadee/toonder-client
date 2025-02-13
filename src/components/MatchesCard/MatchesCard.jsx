@@ -46,8 +46,6 @@ export default function MatchesCard() {
 
   const { profileId: currentUserId } = useParams();
 
-  //  functions
-
   const fetchMatches = async () => {
     setIsLoading(true);
     try {
@@ -78,8 +76,6 @@ export default function MatchesCard() {
     }
   };
 
-
-
   const handleView = async (profileId) => {
     try {
       setShowFullProfile(true);
@@ -101,7 +97,6 @@ export default function MatchesCard() {
         {matches.map((match) => (
           <div key={match._id} className={styles.matchCard}>
             <div className={styles.profileImage}>
-              {/* Render the profile image */}
               {match.profileImage ? (
                 <img
                   src={match.profileImage}
