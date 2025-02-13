@@ -67,7 +67,7 @@ export const matchDelete = async (profileId) => {
         Authorization: `Bearer ${getToken()}`,
       },
     });
-    console.log(res);
+    console.log("Match deleted successfully:", res);
   } catch (error) {
     console.log(error);
     throw error;
