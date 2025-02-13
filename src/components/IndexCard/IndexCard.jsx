@@ -37,6 +37,7 @@ export default function IndexCard() {
   const [error, setError] = useState("");
   const [open, setOpen] = useState(false);
   const [profileDetails, setProfileDetails] = useState({});
+  const [matchMessage, setMatchMessage] = useState(""); 
 
   const fetchProfile = async () => {
     setIsLoading(true);
@@ -60,7 +61,14 @@ export default function IndexCard() {
     if (!currentProfile) return;
     setIsLoading(true);
     try {
-      await profileLike(currentProfile._id);
+      const response = await profileLike(currentProfile._id);
+
+      if (response.message.includes("It's a match")) {
+        setMatchMessage(`🎉 You matched with ${currentProfile.name}! 🎉`);
+
+        setTimeout(() => setMatchMessage(""), 3000);
+      }
+
       fetchProfile();
     } catch (error) {
       console.error(error);
@@ -101,6 +109,8 @@ export default function IndexCard() {
 
   return (
     <>
+      {matchMessage && <div className={styles.matchAlert}>{matchMessage}</div>}
+
       <section className={styles.indexContainer}>
         <div className={styles.indexCard}>
           <div
@@ -190,4 +200,5 @@ export default function IndexCard() {
     </>
   );
 }
+
 
