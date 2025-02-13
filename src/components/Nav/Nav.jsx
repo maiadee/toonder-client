@@ -1,9 +1,9 @@
-46;
-import { useState, useContext } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { UserContext } from "../../contexts/UserContext";
-import { removeToken } from "../../utils/auth";
-import styles from "./nav.module.css";
+import { useState, useContext } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { UserContext } from '../../contexts/UserContext';
+import { removeToken } from '../../utils/auth';
+import styles from './nav.module.css';
+
 export default function NavMenu() {
   const { user, setUser } = useContext(UserContext);
   const [menuOpen, setMenuOpen] = useState(false);

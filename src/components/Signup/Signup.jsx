@@ -32,7 +32,7 @@ export default function Signup(){
     };
     return (
         <section className={styles.container}>
-            <h1>:two_hearts: Sign Up to Toonder :two_hearts:</h1>
+            <h1>💕 Sign Up to Toonder 💕</h1>
             <form onSubmit={handleSubmit}>
                 <div className={styles['form-group']}>
                     <label htmlFor="email">Email</label>
@@ -84,7 +84,7 @@ export default function Signup(){
                         <p className='error-message'>Passwords do not match</p>
                     }
                 </div>
-                <button className={styles.button} disabled={formData.password === '' || formData.password !== formData.confirmPassword} type="submit">Submit</button>
+                <button className={styles.button} disabled={formData.password === '' || formData.password !== formData.confirmPassword} type="submit">Sign Up</button>
             </form>
         </section>
     );
