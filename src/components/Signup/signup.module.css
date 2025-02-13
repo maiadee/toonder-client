@@ -5,15 +5,16 @@
     font-style: normal;
 }
 
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     width: 100vw;
     height: 100vh;
-    background: url("/images/signup.webp") no-repeat center center;
-    background-size: cover;
+    background: url("/images/homepage.jpeg") no-repeat center center !important;
+    background-size: 100% auto !important;    
     position: relative;
-    font-family: 'New Walt Disney', sans-serif !important; 
+    font-family: 'New Walt Disney', sans-serif !important;
     font-size: 20px !important;
 }
 
@@ -104,7 +105,7 @@ html, body {
     margin-top: 15px;
     transition: background 0.3s ease, transform 0.2s ease;
     width: 100%;
-    font-family: 'New Walt Disney', sans-serif !important; 
+    font-family: 'New Walt Disney', sans-serif !important;
     font-size: 1.5rem;
 }
 
