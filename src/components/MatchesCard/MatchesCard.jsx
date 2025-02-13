@@ -31,7 +31,7 @@ const style = {
 };
 
 export default function MatchesCard() {
-  // state
+
 
   const [matches, setMatches] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -61,21 +61,23 @@ export default function MatchesCard() {
   };
 
   useEffect(() => {
-    fetchMatches(); // Fetch a profile when the component loads
+    fetchMatches(); 
   }, [currentUserId]);
 
   const handleRemove = async (profileId) => {
     try {
+
       await matchDelete(profileId); 
       setMatches((prevMatches) =>
         prevMatches.filter((match) => match._id !== profileId)
       );
+
     } catch (error) {
       console.error("Error removing match:", error);
     }
   };
 
-  // function to show full profile
+
 
   const handleView = async (profileId) => {
     try {

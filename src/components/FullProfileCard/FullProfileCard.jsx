@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { profileShow, profileLike, profileDislike } from "../../services/profileService";
 import { useParams } from "react-router-dom";
 import Spinner from "../Spinner/Spinner";
+import styles from "./FullProfileCard.module.css";
 
 export default function FullProfileCard() {
   const { id } = useParams();
@@ -62,21 +63,29 @@ export default function FullProfileCard() {
   if (!profile) return <p>Profile not found.</p>;
 
   return (
-    <div className="full-profile-card">
-      {profile.profileImage && <img src={profile.profileImage} alt="Profile Image 1" className="profile-image" />}
-      <h2>{profile.name}</h2>
-      <p><strong>Age:</strong> {profile.age}</p>
-      <p><strong>Location:</strong> {profile.location}</p>
-      <p><strong>Gender:</strong> {profile.gender}</p>
-      <p><strong>Bio:</strong> {profile.bio}</p>
-      <p><strong>Passions:</strong> {profile.passions || "Not specified"}</p>
-      <p><strong>Icks:</strong> {profile.icks || "Not specified"}</p>
+    <div className={styles["full-profile-card"]}>
+      <div className={styles["profileImage"]}>
+        {profile.profileImage ? (
+          <img src={profile.profileImage} alt={`${profile.name}'s profile`} />
+        ) : (
+          <div className={styles["placeholderImage"]}>No Image</div>
+        )}
+      </div>
+  
+      <div className={styles["profileIndexInfo"]}>
+        <h4>{profile.name}</h4>
+        <p><strong>Age:</strong> {profile.age}</p>
+        <p><strong>Location:</strong> {profile.location}</p>
+        <p><strong>Gender:</strong> {profile.gender}</p>
+        <p><strong>Bio:</strong> {profile.bio}</p>
+        <p><strong>Passions:</strong> {profile.passions || "Not specified"}</p>
+        <p><strong>Icks:</strong> {profile.icks || "Not specified"}</p>
+      </div>
+  
+      <div className={styles["profile-buttons"]}>
+     
       
-      
-      <div className="profile-buttons">
-        <button onClick={handleDislike} disabled={isLoading}>👎</button>
-        <button onClick={handleLike} disabled={isLoading}>👍</button>
       </div>
     </div>
   );
-}
+}  
