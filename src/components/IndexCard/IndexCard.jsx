@@ -103,7 +103,8 @@ export default function IndexCard() {
   if (error) return <p className="error-message">{error}</p>;
 
   // Render if no profiles are available
-  if (!currentProfile) return <p>No profiles available at the moment.</p>;
+  if (!currentProfile)
+    return <p className="pageAlert">No profiles available at the moment.</p>;
 
   // Render profiles
   return (

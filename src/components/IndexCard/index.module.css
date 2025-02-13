@@ -1,3 +1,17 @@
+ html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'New Walt Disney', sans-serif;
+    background: url("/images/matches-index.png") no-repeat center center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    font-size: 1.2rem;
+}   
+
+
 .indexContainer {
   display: flex;
   justify-content: center;

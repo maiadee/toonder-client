@@ -92,7 +92,7 @@ export default function MatchesCard() {
   };
 
   if (isLoading) return <Spinner />;
-  if (matches.length === 0) return <p>💔 No matches available 💔</p>;
+  if (matches.length === 0) return <p className="pageAlert">💔 No matches available 💔</p>;
 
   return (
     <>
