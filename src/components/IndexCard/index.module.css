@@ -1,0 +1,82 @@
+.indexContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.indexCard {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  width: 200px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.indexCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.profileImage img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.placeholderImage {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #757575;
+  font-size: 12px;
+  margin: 0 auto;
+}
+
+.profileIndexInfo h4 {
+  font-weight: bold;
+  font-size: 30px;
+  color: #333;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+}
+
+.profileIndexInfo p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #757575;
+}
+
+.indexCardButtons {
+  margin-top: 15px;
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.indexCardButtons button {
+  background-color: gray;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  font-size: 22px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.indexCardButtons button:hover {
+  background-color: #ccc;
+}

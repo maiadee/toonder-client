@@ -13,7 +13,7 @@ export default function Homepage() {
       <div className={styles.content}>
         {!user && (
           <>
-            <p className={styles.message}>💖 Your fairytale journey awaits you! 💖</p>
+            <p className={styles.message}>💕 Your fairytale journey awaits you! 💕</p>
             <button className={styles.signupButton} onClick={() => navigate("/signup")}>Sign Up</button> 
           </>
         )}

@@ -2,7 +2,8 @@ import { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
 import { profileUpdate, profileShow } from "../../services/profileService";
-import ImageUpload from '../ImageUpload/ImageUpload'
+import styles from './updateProfile.module.css';
+import ImageUpload from '../ImageUpload/ImageUpload';
 
 export default function UpdateProfile() {
     const { user } = useContext(UserContext);
@@ -18,7 +19,7 @@ export default function UpdateProfile() {
         preferences: "",
         passions: "",
         icks: "",
-        profileImage:""
+        profileImage: ""
     });
 
     const [errors, setErrors] = useState({});
@@ -32,7 +33,6 @@ export default function UpdateProfile() {
 
         profileShow(id)
             .then((data) => {
-                console.log(data)
                 if (!data || data._id !== user.profile) {
                     setErrors({ message: "You don't have permission to edit this profile." });
                     return;
@@ -61,21 +61,23 @@ export default function UpdateProfile() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-          console.log("Updating profile:", formData);
-          await profileUpdate(id, formData);
-          navigate("/profiles/index"); 
+            console.log("Updating profile:", formData);
+            await profileUpdate(id, formData);
+            navigate("/profiles/index");
         } catch (error) {
-          setErrors(error.response?.data?.errors || { general: "Failed to update profile." });
+            setErrors(error.response?.data?.errors || { general: "Failed to update profile." });
         }
-      };
-      
-
+    };
 
     return (
-        <>
-            <h1>Update Your Profile</h1>
+        <div className={styles.container}>
+            <h1 className={styles.title}>Update Your Profile</h1>
 
-            <form onSubmit={handleSubmit}>
+            {errors.general && <p className={styles.error}>{errors.general}</p>}
+            {errors.message && <p className={styles.error}>{errors.message}</p>}
+            {errors.fetch && <p className={styles.error}>{errors.fetch}</p>}
+
+            <form className={styles.form} onSubmit={handleSubmit}>
                 <ImageUpload 
                     errors={errors} 
                     setErrors={setErrors}
@@ -84,55 +86,59 @@ export default function UpdateProfile() {
                     isUploading={isUploading}
                     setIsUploading={setIsUploading}
                 />
-                
-                <label>Name:</label>
-                <input type="text" name="name" value={formData.name} onChange={handleChange} required />
 
-                <label>Age:</label>
-                <input type="number" name="age" value={formData.age} onChange={handleChange} required />
+                <div className={styles.formGroup}>
+                    <label>Name:</label>
+                    <input type="text" name="name" value={formData.name} onChange={handleChange} required />
+                </div>
 
-                <label>Location:</label>
-                <input type="text" name="location" value={formData.location} onChange={handleChange} required />
+                <div className={styles.formGroup}>
+                    <label>Age:</label>
+                    <input type="number" name="age" value={formData.age} onChange={handleChange} required />
+                </div>
 
-                <label>Bio:</label>
-                <textarea name="bio" value={formData.bio} onChange={handleChange} />
+                <div className={styles.formGroup}>
+                    <label>Location:</label>
+                    <input type="text" name="location" value={formData.location} onChange={handleChange} required />
+                </div>
 
-                <label>Gender:</label>
-                <select name="gender" value={formData.gender} onChange={handleChange} required>
-                    <option value="" disabled>Select Gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                </select>
+                <div className={`${styles.formGroup} ${styles.fullWidth}`}>
+                    <label>Bio:</label>
+                    <textarea name="bio" value={formData.bio} onChange={handleChange} />
+                </div>
 
-                <label>Looking For:</label>
-                <select name="preferences" value={formData.preferences} onChange={handleChange} required>
-                    <option value="" disabled>Select Preference</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="No Preference">No Preference</option>
-                </select>
+                <div className={styles.formGroup}>
+                    <label>Gender:</label>
+                    <select name="gender" value={formData.gender} onChange={handleChange} required>
+                        <option value="" disabled>Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
 
-                <label>Passions:</label>
-                <input
-                    type="text"
-                    name="passions"
-                    placeholder="E.g., Music, Traveling, Fitness"
-                    value={formData.passions}
-                    onChange={handleChange}
-                />
+                <div className={styles.formGroup}>
+                    <label>Looking For:</label>
+                    <select name="preferences" value={formData.preferences} onChange={handleChange} required>
+                        <option value="" disabled>Select Preference</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="No Preference">No Preference</option>
+                    </select>
+                </div>
 
-                <label>Icks:</label>
-                <input
-                    type="text"
-                    name="icks"
-                    placeholder="E.g., Loud chewing, Being late"
-                    value={formData.icks}
-                    onChange={handleChange}
-                />
+                <div className={styles.formGroup}>
+                    <label>Passions:</label>
+                    <input type="text" name="passions" placeholder="E.g., Music, Traveling, Fitness" value={formData.passions} onChange={handleChange} />
+                </div>
 
-                <button type="submit">Update Profile</button>
+                <div className={styles.formGroup}>
+                    <label>Icks:</label>
+                    <input type="text" name="icks" placeholder="E.g., Loud chewing, Being late" value={formData.icks} onChange={handleChange} />
+                </div>
+
+                <button className={styles.button} type="submit">Update Profile</button>
             </form>
-        </>
+        </div>
     );
 }

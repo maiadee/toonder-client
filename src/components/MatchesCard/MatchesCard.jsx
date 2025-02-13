@@ -66,11 +66,14 @@ export default function MatchesCard() {
 
   const handleRemove = async (profileId) => {
     try {
-      
-      await matchDelete(profileId);
-      setMatches(matches.filter((match) => match._id !== profileId));
+
+      await matchDelete(profileId); 
+      setMatches((prevMatches) =>
+        prevMatches.filter((match) => match._id !== profileId)
+      );
+
     } catch (error) {
-      console.error(error);
+      console.error("Error removing match:", error);
     }
   };
 

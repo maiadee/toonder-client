@@ -1,67 +1,90 @@
-@import url('https://fonts.googleapis.com/css2?family=Disney&display=swap');
+@font-face {
+    font-family: 'New Walt Disney';
+    src: url('/fonts/NewWaltDisneyFontRegular-BPen.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 
 .navbar {
     position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
+    background: transparent;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 1rem 2rem;
+    z-index: 1000;
 }
 
 .navContainer {
     display: flex;
     width: 100%;
-    justify-content: space-between;
+    max-width: 1300px;
     align-items: center;
-    max-width: 1200px;
+    justify-content: space-between;
 }
 
 .leftLinks {
     display: flex;
-    gap: 50px;
+    gap: 60px;
+    flex: 1;
+    justify-content: flex-start;
 }
 
 .rightLinks {
     display: flex;
-    gap: 50px;
+    gap: 60px;
+    flex: 1;
+    justify-content: flex-end;
+}
+
+.logoContainer {
+    flex: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .logo {
     width: 120px;
     height: auto;
     cursor: pointer;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
 .logo:hover {
-    transform: translateX(-50%) scale(1.1);
+    transform: scale(1.1);
     opacity: 0.8;
-}
-
-
-.navLinks {
-    display: flex;
-    align-items: center;
-    gap: 50px;
 }
 
 .link {
     text-decoration: none;
     color: white;
     font-size: 1.2rem;
-    font-family: 'Disney', sans-serif;
+    font-family: 'New Walt Disney', sans-serif;
     transition: color 0.3s ease-in-out;
-    text-align: center;
+    font-weight: bold;
 }
 
 .link:hover {
     transform: scale(1.1);
-    opacity: 0.8; 
+    opacity: 0.8;
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
+@media (max-width: 768px) {
+    .navContainer {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .leftLinks,
+    .rightLinks {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+}
