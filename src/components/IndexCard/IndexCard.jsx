@@ -19,11 +19,11 @@ const modalStyle = {
   transform: "translate(-50%, -50%)",
   width: 300,
   height: 400,
-  bgcolor: "background.paper",
+  bgcolor: "rgba(255, 255, 255, 0.9)",
   border: "0 solid #000",
   boxShadow: 24,
   p: 4,
-  borderRadius: 5,
+  borderRadius: 2,
 };
 
 export default function IndexCard() {
@@ -39,7 +39,7 @@ export default function IndexCard() {
     setIsLoading(true);
     setError("");
     try {
-      const data = await profileIndex();
+      const data = await profileIndex(); // Fetch next profile
       console.log(data);
       setCurrentProfile(data);
     } catch (error) {
@@ -60,7 +60,7 @@ export default function IndexCard() {
     setIsLoading(true);
     try {
       await profileLike(currentProfile._id); // Like the current profile
-      fetchProfile(); // Fetch the next profile
+      fetchProfile(); // Fetch the next profile after liking
     } catch (error) {
       console.error(error);
     } finally {
@@ -74,7 +74,7 @@ export default function IndexCard() {
     setIsLoading(true);
     try {
       await profileDislike(currentProfile._id); // Dislike the current profile
-      fetchProfile(); // Fetch the next profile
+      fetchProfile(); // Fetch the next profile after disliking
     } catch (error) {
       console.error(error);
     } finally {
@@ -133,13 +133,15 @@ export default function IndexCard() {
             </p>
           </div>
           <div className={styles.indexCardButtons}>
-            <button onClick={handleDislike}>👎</button>
-            <button onClick={handleLike}>👍</button>
+            <button className={styles.dislikeButton} onClick={handleDislike}>
+              👎
+            </button>
+            <button className={styles.likeButton} onClick={handleLike}>
+              👍
+            </button>
           </div>
         </div>
       </section>
-
-      {/* Modal for full profile */}
       <Modal
         open={open}
         onClose={handleClose}
@@ -147,28 +149,47 @@ export default function IndexCard() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={modalStyle}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            {profileDetails.name}
-          </Typography>
           {profileDetails.profileImage && (
-            <img
-              src={profileDetails.profileImage}
-              alt={`${profileDetails.name}'s profile`}
-              style={{ width: "100%", borderRadius: "8px" }}
-            />
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <img
+                src={profileDetails.profileImage}
+                alt={`${profileDetails.name}'s profile`}
+                style={{
+                  width: "200px",
+                  height: "200px",
+                  borderRadius: "8px",
+                  objectFit: "cover",
+                  margin: "8px",
+                }}
+              />
+            </div>
           )}
           <Typography
             id="modal-modal-description"
             sx={{ mt: 2 }}
             component="div"
           >
-            <p>
+            <Typography
+              id="modal-modal-title"
+              variant="h6"
+              component="h2"
+              style={{ fontWeight: "bold", fontSize: "25px" }}
+            >
+              {profileDetails.name}
+            </Typography>
+            <p style={{ fontSize: "16px" }}>
               {profileDetails.age}, {profileDetails.gender},{" "}
               {profileDetails.location}
             </p>
-            <div>{profileDetails.bio}</div>
-            <div>{profileDetails.passions}</div>
-            <div>{profileDetails.icks}</div>
+            <div style={{ fontSize: "16px" }}>{profileDetails.bio}</div>
+            <div style={{ fontSize: "16px" }}>{profileDetails.passions}</div>
+            <div style={{ fontSize: "16px" }}>{profileDetails.icks}</div>
           </Typography>
         </Box>
       </Modal>

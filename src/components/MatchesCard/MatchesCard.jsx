@@ -23,11 +23,11 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 300,
   height: 400,
-  bgcolor: "background.paper",
+  bgcolor: "rgba(255, 255, 255, 0.9)",
   border: "0 solid #000",
   boxShadow: 24,
   p: 4,
-  borderRadius: 5,
+  borderRadius: 2,
 };
 
 export default function MatchesCard() {
@@ -135,27 +135,46 @@ export default function MatchesCard() {
             aria-describedby="modal-modal-description"
           >
             <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                {profile.name}
-              </Typography>
               {profile.profileImage && (
-                <img
-                  src={profile.profileImage}
-                  alt={`${profile.name}'s profile`}
-                  style={{ width: "100%", borderRadius: "8px" }}
-                />
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <img
+                    src={profile.profileImage}
+                    alt={`${profile.name}'s profile`}
+                    style={{
+                      width: "200px",
+                      height: "200px",
+                      borderRadius: "8px",
+                      objectFit: "cover",
+                      margin: "8px"
+                    }}
+                  />
+                </div>
               )}
               <Typography
                 id="modal-modal-description"
                 sx={{ mt: 2 }}
                 component="div"
               >
-                <p>
+                <Typography
+                  id="modal-modal-title"
+                  variant="h6"
+                  component="h2"
+                  style={{ fontWeight: "bold", fontSize: "25px" }}
+                >
+                  {profile.name}
+                </Typography>
+                <p style={{ fontSize: "16px" }}>
                   {profile.age}, {profile.gender}, {profile.location}
                 </p>
-                <div>{profile.bio}</div>
-                <div>{profile.passions}</div>
-                <div>{profile.icks}</div>
+                <div style={{ fontSize: "16px" }}>{profile.bio}</div>
+                <div style={{ fontSize: "16px" }}>{profile.passions}</div>
+                <div style={{ fontSize: "16px" }}>{profile.icks}</div>
               </Typography>
             </Box>
           </Modal>

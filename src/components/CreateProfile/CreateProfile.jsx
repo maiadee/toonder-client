@@ -2,8 +2,8 @@ import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
 import { profileCreate } from "../../services/profileService";
-import styles from './createProfile.module.css';
-import ImageUpload from '../ImageUpload/ImageUpload';
+import styles from "./createProfile.module.css";
+import ImageUpload from "../ImageUpload/ImageUpload";
 
 export default function CreateProfile() {
   const { user } = useContext(UserContext);
@@ -38,7 +38,9 @@ export default function CreateProfile() {
       await profileCreate(formData);
       navigate("/profiles/index");
     } catch (error) {
-      setErrors(error.response?.data?.errors || { general: "Failed to create profile." });
+      setErrors(
+        error.response?.data?.errors || { general: "Failed to create profile." }
+      );
     }
   };
 
@@ -53,10 +55,10 @@ export default function CreateProfile() {
       {errors.general && <p className={styles.error}>{errors.general}</p>}
 
       <form className={styles.form} onSubmit={handleSubmit}>
-        <ImageUpload 
-          errors={errors} 
+        <ImageUpload
+          errors={errors}
           setErrors={setErrors}
-          formData={formData} 
+          formData={formData}
           setFormData={setFormData}
           isUploading={isUploading}
           setIsUploading={setIsUploading}
@@ -64,17 +66,35 @@ export default function CreateProfile() {
 
         <div className={styles.formGroup}>
           <label>Name:</label>
-          <input type="text" name="name" value={formData.name} onChange={handleChange} required />
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
         </div>
 
         <div className={styles.formGroup}>
           <label>Age:</label>
-          <input type="number" name="age" value={formData.age} onChange={handleChange} required />
+          <input
+            type="number"
+            name="age"
+            value={formData.age}
+            onChange={handleChange}
+            required
+          />
         </div>
 
         <div className={styles.formGroup}>
           <label>Location:</label>
-          <input type="text" name="location" value={formData.location} onChange={handleChange} required />
+          <input
+            type="text"
+            name="location"
+            value={formData.location}
+            onChange={handleChange}
+            required
+          />
         </div>
 
         <div className={`${styles.formGroup} ${styles.fullWidth}`}>
@@ -84,8 +104,15 @@ export default function CreateProfile() {
 
         <div className={styles.formGroup}>
           <label>Gender:</label>
-          <select name="gender" value={formData.gender} onChange={handleChange} required>
-            <option value="" disabled>Select Gender</option>
+          <select
+            name="gender"
+            value={formData.gender}
+            onChange={handleChange}
+            required
+          >
+            <option value="" disabled>
+              Select Gender
+            </option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
             <option value="Other">Other</option>
@@ -94,8 +121,15 @@ export default function CreateProfile() {
 
         <div className={styles.formGroup}>
           <label>Looking For:</label>
-          <select name="preferences" value={formData.preferences} onChange={handleChange} required>
-            <option value="" disabled>Select Preference</option>
+          <select
+            name="preferences"
+            value={formData.preferences}
+            onChange={handleChange}
+            required
+          >
+            <option value="" disabled>
+              Select Preference
+            </option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
             <option value="No Preference">No Preference</option>
@@ -104,15 +138,29 @@ export default function CreateProfile() {
 
         <div className={styles.formGroup}>
           <label>Passions:</label>
-          <input type="text" name="passions" placeholder="E.g., Music, Traveling, Fitness" value={formData.passions} onChange={handleChange} />
+          <input
+            type="text"
+            name="passions"
+            placeholder="E.g., Music, Traveling, Fitness"
+            value={formData.passions}
+            onChange={handleChange}
+          />
         </div>
 
         <div className={styles.formGroup}>
           <label>Icks:</label>
-          <input type="text" name="icks" placeholder="E.g., Loud chewing, Being late" value={formData.icks} onChange={handleChange} />
+          <input
+            type="text"
+            name="icks"
+            placeholder="E.g., Loud chewing, Being late"
+            value={formData.icks}
+            onChange={handleChange}
+          />
         </div>
 
-        <button className={styles.button} type="submit">Create Profile</button>
+        <button className={styles.button} type="submit">
+          Create Profile
+        </button>
       </form>
     </div>
   );
