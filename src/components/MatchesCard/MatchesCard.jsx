@@ -26,7 +26,7 @@ const style = {
   bgcolor: "rgba(255, 255, 255, 0.9)",
   border: "0 solid #000",
   boxShadow: 24,
-  p: 4,
+  p: 5,
   borderRadius: 2,
 };
 
@@ -151,7 +151,7 @@ export default function MatchesCard() {
                       height: "200px",
                       borderRadius: "8px",
                       objectFit: "cover",
-                      margin: "8px"
+                      margin: "8px",
                     }}
                   />
                 </div>
@@ -165,16 +165,25 @@ export default function MatchesCard() {
                   id="modal-modal-title"
                   variant="h6"
                   component="h2"
-                  style={{ fontWeight: "bold", fontSize: "25px" }}
+                  style={{ fontWeight: "bold", fontSize: "20px" }}
                 >
                   {profile.name}
                 </Typography>
-                <p style={{ fontSize: "16px" }}>
+                <p style={{ fontSize: "14px" }}>
                   {profile.age}, {profile.gender}, {profile.location}
                 </p>
-                <div style={{ fontSize: "16px" }}>{profile.bio}</div>
-                <div style={{ fontSize: "16px" }}>{profile.passions}</div>
-                <div style={{ fontSize: "16px" }}>{profile.icks}</div>
+                <div style={{ fontSize: "13px" }}>
+                  <strong>Bio: </strong>
+                  {profile.bio}
+                </div>
+                <div style={{ fontSize: "13px" }}>
+                  <strong>Passions: </strong>
+                  {profile.passions}
+                </div>
+                <div style={{ fontSize: "13px" }}>
+                  <strong>Icks: </strong>
+                  {profile.icks}
+                </div>
               </Typography>
             </Box>
           </Modal>
