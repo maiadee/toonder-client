@@ -1,16 +1,16 @@
- html, body {
-    margin: 0;
-    padding: 0;
-    font-family: 'New Walt Disney', sans-serif;
-    background: url("/images/matches-index.png") no-repeat center center;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    height: 100vh;
-    font-size: 1.2rem;
-}   
-
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "New Walt Disney", sans-serif;
+  background: url("/images/matches-index.png") no-repeat center center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+  font-size: 1.2rem;
+}
 
 .indexContainer {
   display: flex;
@@ -22,12 +22,12 @@
 }
 
 .indexCard {
-  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.6);
   border: 1px solid #e0e0e0;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 30px;
-  width: 200px;
+  width: 250px;
   text-align: center;
   transition: transform 0.2s, box-shadow 0.2s;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
@@ -81,7 +81,6 @@
 }
 
 .indexCardButtons button {
-  background-color: gray;
   color: white;
   border: none;
   padding: 10px 14px;
@@ -91,6 +90,25 @@
   transition: background-color 0.2s;
 }
 
+/* Like button - Green background */
+.indexCardButtons .likeButton {
+  background-color: rgb(135, 186, 135);
+}
+
+.indexCardButtons .likeButton:hover {
+  background-color: rgb(87, 148, 87); /* Darker green when hovered */
+}
+
+/* Dislike button - Red background */
+.indexCardButtons .dislikeButton {
+  background-color: rgba(226, 99, 67, 0.891);
+}
+
+.indexCardButtons .dislikeButton:hover {
+  background-color: rgba(237, 76, 36, 0.891); /* Darker red when hovered */
+}
+
+/* Hover effect for all buttons */
 .indexCardButtons button:hover {
   background-color: #ccc;
 }
