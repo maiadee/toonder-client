@@ -21,22 +21,22 @@ body {
   box-sizing: border-box;
 }
 
-.indexCard {
-  background-color: rgba(255, 255, 255, 0.6);
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.indexCard, .matchCard {
+  background: rgba(255, 255, 255, 0.15); 
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   padding: 30px;
   width: 250px;
   text-align: center;
   transition: transform 0.2s, box-shadow 0.2s;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
-.indexCard:hover {
+.indexCard:hover, .matchCard:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
 }
 
 .profileImage img {
@@ -44,6 +44,12 @@ body {
   height: 200px;
   object-fit: cover;
   border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.profileImage img:hover {
+  transform: scale(1.05);
 }
 
 .placeholderImage {
@@ -73,14 +79,14 @@ body {
   color: #757575;
 }
 
-.indexCardButtons {
+.indexCardButtons, .matchCardButtons {
   margin-top: 15px;
   display: flex;
   gap: 20px;
   justify-content: space-between;
 }
 
-.indexCardButtons button {
+.indexCardButtons button, .matchCardButtons button {
   color: white;
   border: none;
   padding: 10px 14px;
@@ -90,22 +96,22 @@ body {
   transition: background-color 0.2s;
 }
 
-.indexCardButtons .likeButton {
+.indexCardButtons .likeButton, .matchCardButtons .likeButton {
   background-color: rgb(135, 186, 135);
 }
 
-.indexCardButtons .likeButton:hover {
-  background-color: rgb(87, 148, 87); 
+.indexCardButtons .likeButton:hover, .matchCardButtons .likeButton:hover {
+  background-color: rgb(87, 148, 87);
 }
 
-.indexCardButtons .dislikeButton {
+.indexCardButtons .dislikeButton, .matchCardButtons .dislikeButton {
   background-color: rgba(226, 99, 67, 0.891);
 }
 
-.indexCardButtons .dislikeButton:hover {
-  background-color: rgba(237, 76, 36, 0.891); 
+.indexCardButtons .dislikeButton:hover, .matchCardButtons .dislikeButton:hover {
+  background-color: rgba(237, 76, 36, 0.891);
 }
 
-.indexCardButtons button:hover {
+.indexCardButtons button:hover, .matchCardButtons button:hover {
   background-color: #ccc;
 }
