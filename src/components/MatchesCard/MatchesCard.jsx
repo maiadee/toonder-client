@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router";
-import { UserContext } from "../../contexts/UserContext";
+import { useParams } from "react-router";
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import styles from "./matches.module.css";
+import styles from "./matches.module.css"; 
 
 import {
   profileShow,
@@ -16,61 +14,56 @@ import {
 
 import Spinner from "../Spinner/Spinner";
 
-const style = {
+const modalStyle = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 300,
-  height: 400,
-  bgcolor: "rgba(255, 255, 255, 0.9)",
-  color: "black",
-  border: "0 solid #000",
-  boxShadow: 24,
+  height: "auto", 
+  backdropFilter: "blur(15px)",
+  background: "rgba(255, 255, 255, 0.15)",
+  border: "2px solid rgba(255, 255, 255, 0.3)",
+  boxShadow: "0 8px 32px rgba(0, 0, 0, 0.25)",
+  color: "white",
   p: 5,
-  borderRadius: 2,
+  borderRadius: "10px",
+  display: "flex",
+  flexDirection: "column",
+  gap: "30px", 
 };
 
 export default function MatchesCard() {
-
-
   const [matches, setMatches] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [showFullProfile, setShowFullProfile] = useState(false);
-  const [profile, setProfile] = useState({});
-
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [profile, setProfile] = useState(null);
+  const [open, setOpen] = useState(false);
 
   const { profileId: currentUserId } = useParams();
 
-  const fetchMatches = async () => {
-    setIsLoading(true);
-    try {
-      const data = await matchesIndex(currentUserId);
-      console.log(data);
-      setMatches(data || []);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
-    fetchMatches(); 
+    const fetchMatches = async () => {
+      setIsLoading(true);
+      try {
+        const data = await matchesIndex(currentUserId);
+        setMatches(data || []);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchMatches();
   }, [currentUserId]);
 
   const handleRemove = async (profileId) => {
     try {
-
-      await matchDelete(profileId); 
+      await matchDelete(profileId);
       setMatches((prevMatches) =>
         prevMatches.filter((match) => match._id !== profileId)
       );
-
     } catch (error) {
       console.error("Error removing match:", error);
     }
@@ -78,9 +71,7 @@ export default function MatchesCard() {
 
   const handleView = async (profileId) => {
     try {
-      setShowFullProfile(true);
       setOpen(true);
-      console.log("Viewing profile with ID:", profileId);
       const data = await profileShow(profileId);
       setProfile(data);
     } catch (error) {
@@ -88,19 +79,28 @@ export default function MatchesCard() {
     }
   };
 
+  const handleClose = () => {
+    setOpen(false);
+    setProfile(null);
+  };
+
   if (isLoading) return <Spinner />;
-  if (matches.length === 0) return <p className="pageAlert">💔 No matches available 💔</p>;
+  if (matches.length === 0)
+    return <p className="pageAlert">💔 No matches available 💔</p>;
 
   return (
     <>
       <div className={styles.matchesGrid}>
         {matches.map((match) => (
           <div key={match._id} className={styles.matchCard}>
-            <div className={styles.profileImage}>
+            <div className={styles.profileImage} onClick={() => handleView(match._id)}>
               {match.profileImage ? (
                 <img
                   src={match.profileImage}
                   alt={`Profile of ${match.name}`}
+                  style={{ cursor: "pointer", transition: "transform 0.2s" }}
+                  onMouseOver={(e) => (e.target.style.transform = "scale(1.05)")}
+                  onMouseOut={(e) => (e.target.style.transform = "scale(1)")}
                 />
               ) : (
                 <div className={styles.placeholderImage}>No Image</div>
@@ -108,82 +108,51 @@ export default function MatchesCard() {
             </div>
             <div className={styles.profileIndexInfo}>
               <h4>{match.name}</h4>
-              <p>{match.age},</p>
-              <p>{match.location}</p>
+              <p>{match.age}, {match.location}</p>
             </div>
             <div className={styles.matchCardButtons}>
-              <button onClick={() => handleRemove(match._id)}>
-                Remove Match
-              </button>
-              <button onClick={() => handleView(match._id)}>
-                View Profile
-              </button>
+              <button onClick={() => handleRemove(match._id)}>Remove Match</button>
+              <button onClick={() => handleView(match._id)}>View Profile</button>
             </div>
           </div>
         ))}
       </div>
-      {showFullProfile && (
-        <div>
-          <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={style}>
-              {profile.profileImage && (
-                <div
+
+      {profile && (
+        <Modal open={open} onClose={handleClose} aria-labelledby="modal-title">
+          <Box sx={modalStyle}>
+            {profile.profileImage && (
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <img
+                  src={profile.profileImage}
+                  alt={`${profile.name}'s profile`}
                   style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
+                    width: "200px",
+                    height: "200px",
+                    borderRadius: "8px",
+                    objectFit: "cover",
+                    margin: "8px",
                   }}
-                >
-                  <img
-                    src={profile.profileImage}
-                    alt={`${profile.name}'s profile`}
-                    style={{
-                      width: "200px",
-                      height: "200px",
-                      borderRadius: "8px",
-                      objectFit: "cover",
-                      margin: "8px",
-                    }}
-                  />
-                </div>
-              )}
-              <Typography
-                id="modal-modal-description"
-                sx={{ mt: 2 }}
-                component="div"
-              >
-                <Typography
-                  id="modal-modal-title"
-                  variant="h6"
-                  component="h2"
-                  style={{ fontWeight: "bold", fontSize: "20px" }}
-                >
-                  {profile.name}
-                </Typography>
-                <p style={{ fontSize: "14px" }}>
-                  {profile.age}, {profile.gender}, {profile.location}
-                </p>
-                <div style={{ fontSize: "13px" }}>
-                  <strong>Bio: </strong>
-                  {profile.bio}
-                </div>
-                <div style={{ fontSize: "13px" }}>
-                  <strong>Passions: </strong>
-                  {profile.passions}
-                </div>
-                <div style={{ fontSize: "13px" }}>
-                  <strong>Icks: </strong>
-                  {profile.icks}
-                </div>
-              </Typography>
-            </Box>
-          </Modal>
-        </div>
+                />
+              </div>
+            )}
+            <Typography id="modal-title" variant="h6" component="h2" sx={{ fontWeight: "bold", fontSize: "20px" }}>
+              {profile.name}
+            </Typography>
+            <Typography sx={{ fontSize: "14px" }}>
+              {profile.age}, {profile.gender}, {profile.location}
+            </Typography>
+            <Typography sx={{ fontSize: "13px" }}>
+              <strong>Bio: </strong> {profile.bio}
+            </Typography>
+            <Typography sx={{ fontSize: "13px" }}>
+              <strong>Passions: </strong> {profile.passions}
+            </Typography>
+            <Typography sx={{ fontSize: "13px" }}>
+              <strong>Icks: </strong> {profile.icks}
+            </Typography>
+          </Box>
+        </Modal>
       )}
     </>
   );
