@@ -90,25 +90,25 @@ body {
   transition: background-color 0.2s;
 }
 
-/* Like button - Green background */
+
 .indexCardButtons .likeButton {
   background-color: rgb(135, 186, 135);
 }
 
 .indexCardButtons .likeButton:hover {
-  background-color: rgb(87, 148, 87); /* Darker green when hovered */
+  background-color: rgb(87, 148, 87); 
 }
 
-/* Dislike button - Red background */
+
 .indexCardButtons .dislikeButton {
   background-color: rgba(226, 99, 67, 0.891);
 }
 
 .indexCardButtons .dislikeButton:hover {
-  background-color: rgba(237, 76, 36, 0.891); /* Darker red when hovered */
+  background-color: rgba(237, 76, 36, 0.891); 
 }
 
-/* Hover effect for all buttons */
+
 .indexCardButtons button:hover {
   background-color: #ccc;
 }

@@ -24,6 +24,7 @@ const style = {
   width: 300,
   height: 400,
   bgcolor: "rgba(255, 255, 255, 0.9)",
+  color: "black",
   border: "0 solid #000",
   boxShadow: 24,
   p: 5,
