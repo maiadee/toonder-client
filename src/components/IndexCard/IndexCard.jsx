@@ -62,20 +62,24 @@ export default function IndexCard() {
     setIsLoading(true);
     try {
       const response = await profileLike(currentProfile._id);
-
+  
       if (response.message.includes("It's a match")) {
         setMatchMessage(`🎉 You matched with ${currentProfile.name}! 🎉`);
-
-        setTimeout(() => setMatchMessage(""), 3000);
+  
+        setTimeout(() => {
+          setMatchMessage("");
+          fetchProfile();
+        }, 3000);
+      } else {
+        fetchProfile();
       }
-
-      fetchProfile();
     } catch (error) {
       console.error(error);
     } finally {
       setIsLoading(false);
     }
   };
+  
 
   const handleDislike = async () => {
     if (!currentProfile) return;
