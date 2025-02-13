@@ -6,7 +6,7 @@ import styles from "./createProfile.module.css";
 import ImageUpload from "../ImageUpload/ImageUpload";
 
 export default function CreateProfile() {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -35,8 +35,14 @@ export default function CreateProfile() {
     try {
       formData.age = Number(formData.age);
       console.log("Submitting profile:", formData);
-      await profileCreate(formData);
-      navigate("/profiles/index");
+      const newProfile = await profileCreate(formData);
+
+      setUser((prevUser) => ({
+        ...prevUser,
+        profile: newProfile._id, 
+      }));
+
+      navigate(`/profiles/update/${newProfile._id}`);
     } catch (error) {
       setErrors(
         error.response?.data?.errors || { general: "Failed to create profile." }
