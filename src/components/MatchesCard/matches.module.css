@@ -9,8 +9,8 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+    color: white !important;
 }   
-
 
 .matchesGrid {
     display: grid;
@@ -65,14 +65,14 @@
 .profileIndexInfo h4 {
   font-weight: bold;
   font-size: 22px;
-  color: #333;
+  color: #333 !important;
   margin-bottom: 5px;
 }
 
 .profileIndexInfo p {
   margin: 0;
   font-size: 15px;
-  color: #454444;
+  color: #454444 !important;
   padding-top: 8px;
   padding-bottom: 8px;
 }
@@ -98,3 +98,6 @@
 .matchCardButtons button:hover {
   background-color: rgb(189, 204, 225);
 }
+
+
+
