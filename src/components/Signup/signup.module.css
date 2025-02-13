@@ -11,8 +11,8 @@ body {
     padding: 0;
     width: 100vw;
     height: 100vh;
-    background: url("/images/homepage.jpeg") no-repeat center center !important;
-    background-size: 100% auto !important;    
+    background: url("/images/homepage.jpeg") no-repeat center center;
+    background-size: cover;  
     position: relative;
     font-family: 'New Walt Disney', sans-serif !important;
     font-size: 20px !important;
