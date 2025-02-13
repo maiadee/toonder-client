@@ -1,90 +1,90 @@
 @font-face {
-    font-family: 'New Walt Disney';
-    src: url('/fonts/NewWaltDisneyFontRegular-BPen.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "New Walt Disney";
+  src: url("/fonts/NewWaltDisneyFontRegular-BPen.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 .navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem 2rem;
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 2rem;
+  z-index: 1000;
 }
 
 .navContainer {
-    display: flex;
-    width: 100%;
-    max-width: 1300px;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  width: 100%;
+  max-width: 1300px;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .leftLinks {
-    display: flex;
-    gap: 60px;
-    flex: 1;
-    justify-content: flex-start;
+  display: flex;
+  gap: 60px;
+  flex: 1;
+  justify-content: flex-start;
 }
 
 .rightLinks {
-    display: flex;
-    gap: 60px;
-    flex: 1;
-    justify-content: flex-end;
+  display: flex;
+  gap: 60px;
+  flex: 1;
+  justify-content: flex-end;
 }
 
 .logoContainer {
-    flex: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  flex: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .logo {
-    width: 120px;
-    height: auto;
-    cursor: pointer;
-    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  width: 120px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
 .logo:hover {
-    transform: scale(1.1);
-    opacity: 0.8;
+  transform: scale(1.1);
+  opacity: 0.8;
 }
 
 .link {
-    text-decoration: none;
-    color: white;
-    font-size: 1.2rem;
-    font-family: 'New Walt Disney', sans-serif;
-    transition: color 0.3s ease-in-out;
-    font-weight: bold;
+  text-decoration: none;
+  color: white;
+  font-size: 1.2rem;
+  font-family: "New Walt Disney", sans-serif;
+  transition: color 0.3s ease-in-out;
+  font-weight: bold;
 }
 
 .link:hover {
-    transform: scale(1.1);
-    opacity: 0.8;
-    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  transform: scale(1.1);
+  opacity: 0.8;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
 @media (max-width: 768px) {
-    .navContainer {
-        flex-direction: column;
-        gap: 20px;
-        text-align: center;
-    }
+  .navContainer {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
 
-    .leftLinks,
-    .rightLinks {
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-    }
+  .leftLinks,
+  .rightLinks {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
 }
