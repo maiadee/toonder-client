@@ -46,7 +46,7 @@ export default function NavMenu() {
           )}
         </div>
         <img
-          src="/images/logo.png"
+          src="https://res.cloudinary.com/dq9lsxbkh/image/upload/v1739525778/logo_rlymnr.png"
           alt="Toonder Logo"
           className={styles.logo}
           onClick={() => navigate("/")}
