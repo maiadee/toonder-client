@@ -3,7 +3,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: "New Walt Disney", sans-serif;
-  background: url("/images/homepage.jpeg") no-repeat center center;
+  background: url("https://res.cloudinary.com/dq9lsxbkh/image/upload/v1739524430/homepage_rzdfsu.jpg") no-repeat center center;
   background-size: cover;
   display: flex;
   justify-content: center;
