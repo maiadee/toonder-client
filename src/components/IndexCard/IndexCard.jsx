@@ -18,29 +18,32 @@ const modalStyle = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 300,
-  height: 400,
-  bgcolor: "rgba(255, 255, 255, 0.9)",
-  color: "black",
-  border: "0 solid #000",
-  boxShadow: 24,
+  height: "auto",
+  backdropFilter: "blur(15px)",
+  background: "rgba(255, 255, 255, 0.15)",
+  border: "2px solid rgba(255, 255, 255, 0.3)",
+  boxShadow: "0 8px 32px rgba(0, 0, 0, 0.25)",
+  color: "white",
   p: 5,
-  borderRadius: 2,
+  borderRadius: "10px",
+  display: "flex",
+  flexDirection: "column",
+  gap: "20px",
 };
 
 export default function IndexCard() {
-  
-  const [currentProfile, setCurrentProfile] = useState(null); 
+  const [currentProfile, setCurrentProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [open, setOpen] = useState(false); // Modal state
-  const [profileDetails, setProfileDetails] = useState({}); // Full profile details for modal
+  const [open, setOpen] = useState(false);
+  const [profileDetails, setProfileDetails] = useState({});
+  const [matchMessage, setMatchMessage] = useState(""); 
 
   const fetchProfile = async () => {
     setIsLoading(true);
     setError("");
     try {
-      const data = await profileIndex(); // Fetch next profile
-      console.log(data);
+      const data = await profileIndex();
       setCurrentProfile(data);
     } catch (error) {
       console.error(error);
@@ -51,28 +54,39 @@ export default function IndexCard() {
   };
 
   useEffect(() => {
-    fetchProfile(); 
+    fetchProfile();
   }, []);
 
   const handleLike = async () => {
-    if (!currentProfile) return; // No profile to like
+    if (!currentProfile) return;
     setIsLoading(true);
     try {
-      await profileLike(currentProfile._id); // Like the current profile
-      fetchProfile(); 
+      const response = await profileLike(currentProfile._id);
+  
+      if (response.message.includes("It's a match")) {
+        setMatchMessage(`🎉 You matched with ${currentProfile.name}! 🎉`);
+  
+        setTimeout(() => {
+          setMatchMessage("");
+          fetchProfile();
+        }, 3000);
+      } else {
+        fetchProfile();
+      }
     } catch (error) {
       console.error(error);
     } finally {
       setIsLoading(false);
     }
   };
+  
 
   const handleDislike = async () => {
-    if (!currentProfile) return; 
+    if (!currentProfile) return;
     setIsLoading(true);
     try {
-      await profileDislike(currentProfile._id); 
-      fetchProfile(); 
+      await profileDislike(currentProfile._id);
+      fetchProfile();
     } catch (error) {
       console.error(error);
     } finally {
@@ -82,8 +96,8 @@ export default function IndexCard() {
 
   const handleViewProfile = async (profileId) => {
     try {
-      setOpen(true); // Open the modal
-      const data = await profileShow(profileId); 
+      setOpen(true);
+      const data = await profileShow(profileId);
       setProfileDetails(data);
     } catch (error) {
       console.error(error);
@@ -92,23 +106,20 @@ export default function IndexCard() {
 
   const handleClose = () => setOpen(false);
 
-  // Render loading state
   if (isLoading) return <Spinner />;
-
-  // Render error state
   if (error) return <p className="error-message">{error}</p>;
-
-  // Render if no profiles are available
   if (!currentProfile)
-    return <p className="pageAlert">No profiles available at the moment.</p>;
+    return <p className="pageAlert">🥲 No profiles available right now! 🥲</p>;
 
   return (
     <>
+      {matchMessage && <div className={styles.matchAlert}>{matchMessage}</div>}
+
       <section className={styles.indexContainer}>
         <div className={styles.indexCard}>
           <div
             className={styles.profileImage}
-            onClick={() => handleViewProfile(currentProfile._id)} // Trigger modal on image click
+            onClick={() => handleViewProfile(currentProfile._id)}
           >
             {currentProfile.profileImage ? (
               <img
@@ -150,6 +161,7 @@ export default function IndexCard() {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                marginBottom: "15px",
               }}
             >
               <img
@@ -160,43 +172,37 @@ export default function IndexCard() {
                   height: "200px",
                   borderRadius: "8px",
                   objectFit: "cover",
-                  margin: "5px",
                 }}
               />
             </div>
           )}
           <Typography
-            id="modal-modal-description"
-            sx={{ mt: 2 }}
-            component="div"
+            id="modal-modal-title"
+            variant="h6"
+            component="h2"
+            sx={{ fontWeight: "bold", fontSize: "20px", marginBottom: "10px" }}
           >
-            <Typography
-              id="modal-modal-title"
-              variant="h6"
-              component="h2"
-              style={{ fontWeight: "bold", fontSize: "20px" }}
-            >
-              {profileDetails.name}
-            </Typography>
-            <p style={{ fontSize: "14px" }}>
-              {profileDetails.age}, {profileDetails.gender},{" "}
-              {profileDetails.location}
-            </p>
-            <div style={{ fontSize: "13px" }}>
-              <strong>Bio: </strong>
-              {profileDetails.bio}
-            </div>
-            <div style={{ fontSize: "13px" }}>
-              <strong>Passions: </strong>
-              {profileDetails.passions}
-            </div>
-            <div style={{ fontSize: "13px" }}>
-              <strong>Icks: </strong>
-              {profileDetails.icks}
-            </div>
+            {profileDetails.name}
+          </Typography>
+          <Typography sx={{ fontSize: "14px", marginBottom: "10px" }}>
+            {profileDetails.age}, {profileDetails.gender}, {profileDetails.location}
+          </Typography>
+          <Typography sx={{ fontSize: "13px", marginBottom: "10px" }}>
+            <strong>Bio: </strong>
+            {profileDetails.bio}
+          </Typography>
+          <Typography sx={{ fontSize: "13px", marginBottom: "10px" }}>
+            <strong>Passions: </strong>
+            {profileDetails.passions}
+          </Typography>
+          <Typography sx={{ fontSize: "13px" }}>
+            <strong>Icks: </strong>
+            {profileDetails.icks}
           </Typography>
         </Box>
       </Modal>
     </>
   );
 }
+
+

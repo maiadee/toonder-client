@@ -42,7 +42,7 @@ export default function CreateProfile() {
         profile: newProfile._id, 
       }));
 
-      navigate(`/profiles/update/${newProfile._id}`);
+      navigate('/profiles/index');
     } catch (error) {
       setErrors(
         error.response?.data?.errors || { general: "Failed to create profile." }
