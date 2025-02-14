@@ -54,7 +54,7 @@ export default function MatchesCard() {
         setIsLoading(false);
       }
     };
-
+    
     fetchMatches();
   }, [currentUserId]);
 
