@@ -32,8 +32,6 @@ const style = {
 };
 
 export default function MatchesCard() {
-
-
   const [matches, setMatches] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -60,17 +58,15 @@ export default function MatchesCard() {
   };
 
   useEffect(() => {
-    fetchMatches(); 
+    fetchMatches();
   }, [currentUserId]);
 
   const handleRemove = async (profileId) => {
     try {
-
-      await matchDelete(profileId); 
+      await matchDelete(profileId);
       setMatches((prevMatches) =>
         prevMatches.filter((match) => match._id !== profileId)
       );
-
     } catch (error) {
       console.error("Error removing match:", error);
     }
@@ -89,7 +85,8 @@ export default function MatchesCard() {
   };
 
   if (isLoading) return <Spinner />;
-  if (matches.length === 0) return <p className="pageAlert">💔 No matches available 💔</p>;
+  if (matches.length === 0)
+    return <p className="pageAlert">💔 No matches available 💔</p>;
 
   return (
     <>
