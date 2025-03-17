@@ -6,8 +6,9 @@ We had one week to complete our third project of the course, and in a team of th
 
 ### Collaborators 
 
-Anna Jones
-Ari Ram
+- [Anna Jones](https://github.com/annam-jones)
+- [Arya Ram](https://github.com/arya-lunaris)
+
 
 ![Toonder](<ReadMe Images/toonder-home.png>)
 
