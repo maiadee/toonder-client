@@ -191,7 +191,7 @@ router.get("/profiles", validateToken, async (req, res, next) => {
 
 - The whole index card was a win! It involved dealing with several functions - profileLike, profileDislike, profileShow, and profileIndex. Getting them all to work in one component felt incredibly satisfying. I really pushed myself and learned a lot about the relationships between the API and client, and how they work together.
 
-### Key Learnings/Takeaways
+### Key Learnings/Takeaways
 
 - I feel more confident with the API after this week, especially in understanding how it works and how it impacts the logic on the client side.
 - I’ve gotten better at troubleshooting and figuring out where bugs are coming from, with the ability to trace issues back to their source more effectively.
