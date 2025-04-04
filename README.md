@@ -42,9 +42,13 @@ Node.js, Express.js, React, Javascript, CSS, HTML, MongoDB, Mongo Atlas, Mongoos
 
 ### Planning
 
+We split up our planning deliverables, Anna created the wireframes, Ari created our ERD diagrams and I created the rotuing table and trello board
+
 ![Toonder](<ReadMe Images/toonder-wireframe.png>)
 
 ![Toonder](<ReadMe Images/toonder-erd.png>)
+
+![Toonder](<ReadMe Images/toonder-routing-table.png>)
 
 ![Toonder](<ReadMe Images/toonder-trello.png>)
 
