@@ -4,7 +4,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import styles from "./matches.module.css"; 
+import styles from "./matches.module.css";
 
 import {
   profileShow,
@@ -20,7 +20,7 @@ const modalStyle = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 300,
-  height: "auto", 
+  height: "auto",
   backdropFilter: "blur(15px)",
   background: "rgba(255, 255, 255, 0.15)",
   border: "2px solid rgba(255, 255, 255, 0.3)",
@@ -30,7 +30,7 @@ const modalStyle = {
   borderRadius: "10px",
   display: "flex",
   flexDirection: "column",
-  gap: "30px", 
+  gap: "30px",
 };
 
 export default function MatchesCard() {
@@ -54,7 +54,7 @@ export default function MatchesCard() {
         setIsLoading(false);
       }
     };
-    
+
     fetchMatches();
   }, [currentUserId]);
 
@@ -93,13 +93,18 @@ export default function MatchesCard() {
       <div className={styles.matchesGrid}>
         {matches.map((match) => (
           <div key={match._id} className={styles.matchCard}>
-            <div className={styles.profileImage} onClick={() => handleView(match._id)}>
+            <div
+              className={styles.profileImage}
+              onClick={() => handleView(match._id)}
+            >
               {match.profileImage ? (
                 <img
                   src={match.profileImage}
                   alt={`Profile of ${match.name}`}
                   style={{ cursor: "pointer", transition: "transform 0.2s" }}
-                  onMouseOver={(e) => (e.target.style.transform = "scale(1.05)")}
+                  onMouseOver={(e) =>
+                    (e.target.style.transform = "scale(1.05)")
+                  }
                   onMouseOut={(e) => (e.target.style.transform = "scale(1)")}
                 />
               ) : (
@@ -108,11 +113,17 @@ export default function MatchesCard() {
             </div>
             <div className={styles.profileIndexInfo}>
               <h4>{match.name}</h4>
-              <p>{match.age}, {match.location}</p>
+              <p>
+                {match.age}, {match.location}
+              </p>
             </div>
             <div className={styles.matchCardButtons}>
-              <button onClick={() => handleRemove(match._id)}>Remove Match</button>
-              <button onClick={() => handleView(match._id)}>View Profile</button>
+              <button onClick={() => handleRemove(match._id)}>
+                Remove Match
+              </button>
+              <button onClick={() => handleView(match._id)}>
+                View Profile
+              </button>
             </div>
           </div>
         ))}
@@ -120,7 +131,7 @@ export default function MatchesCard() {
 
       {profile && (
         <Modal open={open} onClose={handleClose} aria-labelledby="modal-title">
-          <Box sx={modalStyle}>
+          <Box sx={modalStyle}> 
             {profile.profileImage && (
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <img
@@ -136,7 +147,12 @@ export default function MatchesCard() {
                 />
               </div>
             )}
-            <Typography id="modal-title" variant="h6" component="h2" sx={{ fontWeight: "bold", fontSize: "20px" }}>
+            <Typography
+              id="modal-title"
+              variant="h6"
+              component="h2"
+              sx={{ fontWeight: "bold", fontSize: "20px" }}
+            >
               {profile.name}
             </Typography>
             <Typography sx={{ fontSize: "14px" }}>
