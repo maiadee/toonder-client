@@ -203,6 +203,7 @@ router.get("/profiles", validateToken, async (req, res, next) => {
 
 ### Future Improvements
 
+- Make the app mobile responsive! This will give it the real dating app feel!
 - Having a chat function. Unread message symbol displayed on particular profile card to signal a message has been sent
 - Slide in transition of the two cards together when there is a match - improves the UX
 - When a user likes a profile card, the card flies to the left, when they dislike, the card flies to the right
